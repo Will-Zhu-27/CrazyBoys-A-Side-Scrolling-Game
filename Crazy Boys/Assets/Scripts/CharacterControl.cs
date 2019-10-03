@@ -61,10 +61,15 @@ public class CharacterControl : MonoBehaviour
     private void CharacterMove() {
         float forwardMovement = 0f, rightMovement = 0f;
         if (forwardInput > 0.1) {
-            forwardMovement = forwardInput * walkForwardSpeed;
+            if (isRun) {
+                forwardMovement = forwardInput * runSpeed;
+            } else {
+                forwardMovement = forwardInput * walkForwardSpeed;
+            }
         } else if (forwardInput < -0.1) {
             forwardMovement = forwardInput * walkBackwardSpeed;
         }
+        
         rightMovement = rightInput * walkForwardSpeed;
         Vector3 forwardVect = transform.TransformDirection(Vector3.forward).normalized * forwardMovement;
         Vector3 rightVect = transform.TransformDirection(Vector3.right).normalized * rightMovement;
