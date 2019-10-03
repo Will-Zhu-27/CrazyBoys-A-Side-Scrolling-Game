@@ -6,6 +6,7 @@ public class CharacterControl : MonoBehaviour
 {
     [SerializeField] private string forwardInputName;
     [SerializeField] private string rightInputName;
+    [SerializeField] private KeyCode shootingKeyCode;
     public float walkForwardSpeed;
     public float walkBackwardSpeed;
     public float runSpeed;
@@ -54,6 +55,11 @@ public class CharacterControl : MonoBehaviour
             StartCoroutine(JumpEvent());
         }
         animator.SetBool("isJump", isJump);
+
+        if (Input.GetKey(shootingKeyCode)) {
+            animator.Play("Shooting With Handgun");
+        }
+
 
         CharacterMove();
     }
