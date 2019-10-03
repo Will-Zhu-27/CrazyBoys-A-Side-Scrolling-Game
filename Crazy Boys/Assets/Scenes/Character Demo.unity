@@ -288,13 +288,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.09562228, y: 0.7006115, z: -0.09562228, w: 0.7006115}
-  m_LocalPosition: {x: -6.05, y: 2.98, z: -0.15}
+  m_LocalRotation: {x: 0.13523139, y: 0, z: 0, w: 0.99081403}
+  m_LocalPosition: {x: -0.14, y: 2.98, z: -8.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 15.544001, y: 90.00001, z: 0}
+  m_LocalEulerAnglesHint: {x: 15.544001, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookAtCharacter: {fileID: 5063536609190335033}
+  smoothSpeed: 0.125
+  posOffset: {x: 0, y: 2, z: -8}
 --- !u!1 &1547000925
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +397,7 @@ Transform:
   m_GameObject: {fileID: 1547000925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 100, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2652,7 +2654,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5063536609190652597}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2669,7 +2671,7 @@ Transform:
   - {fileID: 5063536609190225255}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &5063536609190335651
 Transform:
   m_ObjectHideFlags: 0
@@ -3724,9 +3726,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859d5cddc67e1604586c9455fdcf7972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forwardInputName: Horizontal
+  rightInputName: Vertical
   walkForwardSpeed: 2.5
   walkBackwardSpeed: 1
   runSpeed: 10
+  jumpFallOff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0023499
+      inSlope: 0.2339501
+      outSlope: 0.2339501
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.15958191
+    - serializedVersion: 3
+      time: 1
+      value: -0.0000076293945
+      inSlope: 0.1485195
+      outSlope: 0.1485195
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17373574
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpMultiplier: 5
+  runJumpMultiplier: 10
   jumpKeyCode: 32
   runKeyCode: 304
   animator: {fileID: 5063536609181201457}

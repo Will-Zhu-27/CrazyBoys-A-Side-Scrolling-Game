@@ -11,6 +11,7 @@ public class CharacterControl : MonoBehaviour
     public float runSpeed;
     [SerializeField] private AnimationCurve jumpFallOff;
     [SerializeField] private float jumpMultiplier;
+    [SerializeField] private float runJumpMultiplier;
     [SerializeField] private KeyCode jumpKeyCode;
     [SerializeField] private KeyCode runKeyCode;
     public Animator animator;
@@ -19,6 +20,7 @@ public class CharacterControl : MonoBehaviour
     private float rightInput;
     private bool isWalk = false;
     private bool isJump = false;
+    private bool isRun = false;
 
     void Start() {
         // Debug.Log(transform.TransformDirection(Vector3.forward).normalized);
@@ -38,6 +40,13 @@ public class CharacterControl : MonoBehaviour
             isWalk = true;
         }
         animator.SetBool("isWalk", isWalk);
+
+        if (Input.GetKey(runKeyCode)) {
+            isRun = true;
+        } else {
+            isRun = false;
+        }
+        animator.SetBool("isRun", isRun);
 
         if (!isJump && Input.GetKey(jumpKeyCode)) {
             Debug.Log("jump event!");
@@ -69,7 +78,11 @@ public class CharacterControl : MonoBehaviour
         do
         {
             float jumpForce = jumpFallOff.Evaluate(timeInAir);
-            characterController.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
+            if (isRun) {
+                characterController.Move(Vector3.up * jumpForce * runJumpMultiplier * Time.deltaTime); 
+            } else {
+               characterController.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime); 
+            }
             timeInAir += Time.deltaTime;
             yield return null;
         } while (!characterController.isGrounded && characterController.collisionFlags != CollisionFlags.Above);
