@@ -1697,8 +1697,8 @@ GameObject:
   - component: {fileID: 565473193540236945}
   - component: {fileID: 565473193530779670}
   - component: {fileID: 565473193530779671}
-  - component: {fileID: 565473193530779672}
   - component: {fileID: 565473193530779673}
+  - component: {fileID: 565473193530779674}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1744,19 +1744,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.925, z: 0}
---- !u!114 &565473193530779672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565473193530779669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6dd5b4d501704a05a59aad28154b615, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aim: {fileID: 228680625}
 --- !u!114 &565473193530779673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1769,8 +1756,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e494b9797fc6a4e08a18c8de5bb2cf7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ikActive: 0
+  ikActive: 1
   lookObj: {fileID: 228680626}
+  isHeadWatch: 1
+--- !u!114 &565473193530779674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565473193530779669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13eef098701444ff8a1ee92f652d1e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPoint: {fileID: 565473193531270001}
+  watchPoint: {fileID: 228680626}
 --- !u!1 &565473193530780037
 GameObject:
   m_ObjectHideFlags: 0
