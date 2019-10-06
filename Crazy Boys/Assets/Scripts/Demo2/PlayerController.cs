@@ -9,16 +9,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float forwardWalkSpeed;
     [SerializeField] private float backwardWalkSpeed;
     [SerializeField] private string forwardMoveInputName = "Horizontal";
+    [SerializeField] private KeyCode crouchKeyCode = KeyCode.S;
     private CharacterController characterController;
     private Animator animator;
     private float forwardMoveInput;
     private int forwardMoveId;
+    private int isCrouchId;
+    private bool isCrouch = false;
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         forwardMoveId = Animator.StringToHash("forwardMove");
+        isCrouchId = Animator.StringToHash("isCrouch");
 
     }
 
@@ -27,6 +31,13 @@ public class PlayerController : MonoBehaviour
     {
         forwardMoveInput = Input.GetAxis(forwardMoveInputName);
         animator.SetFloat(forwardMoveId, forwardMoveInput);
+
+        if (Input.GetKeyDown(crouchKeyCode)) {
+            isCrouch = true;
+        } else if (Input.GetKeyUp(crouchKeyCode)) {
+            isCrouch = false;
+        }
+        animator.SetBool(isCrouchId, isCrouch);
         CharacterMove();
     }
         private void CharacterMove() {
