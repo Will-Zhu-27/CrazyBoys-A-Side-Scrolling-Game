@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private string forwardMoveInputName = "Horizontal";
     [SerializeField] private KeyCode crouchKeyCode = KeyCode.S;
     [SerializeField] private KeyCode runKeyCode = KeyCode.LeftShift;
+    [SerializeField] private KeyCode shootingKeyCode = KeyCode.Mouse0;
     [SerializeField] private Transform trackObj;
     [SerializeField] private float trunBackThreshold = 0f;
     [SerializeField] private float homingSpeed = 0.125f;
@@ -29,7 +30,8 @@ public class PlayerController : MonoBehaviour
     private bool isTurnBack;
     private bool isFaceForward;
     private int isFaceForwardId;
-    private Transform targetObj;
+    private int isShootingId;
+    private bool isShooting;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +43,7 @@ public class PlayerController : MonoBehaviour
         isTurnBackId = Animator.StringToHash("isTurnBack");
         isFaceForwardId = Animator.StringToHash("isFaceForward");
         isFaceForward = animator.GetBool(isFaceForwardId);
-        Debug.Log(transform.rotation);
+        isShootingId = Animator.StringToHash("isShooting");
     }
 
     // Update is called once per frame
@@ -69,6 +71,15 @@ public class PlayerController : MonoBehaviour
             isRun = false;
         }
         animator.SetBool(isRunId, isRun);
+
+        // judge shooting
+        if (Input.GetKeyDown(shootingKeyCode)) {
+            isShooting = true;
+        } else if (Input.GetKeyUp(shootingKeyCode)){
+            isShooting = false;
+        }
+        animator.SetBool(isShootingId, isShooting);
+
         detectTurnBack();
         CharacterMove();
     }

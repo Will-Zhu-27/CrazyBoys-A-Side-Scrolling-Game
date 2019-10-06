@@ -1757,6 +1757,7 @@ MonoBehaviour:
   forwardMoveInputName: Horizontal
   crouchKeyCode: 115
   runKeyCode: 304
+  shootingKeyCode: 323
   trackObj: {fileID: 228680626}
   trunBackThreshold: 0
   homingSpeed: 0.125
@@ -1785,7 +1786,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565473193530779669}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e494b9797fc6a4e08a18c8de5bb2cf7d, type: 3}
   m_Name: 
@@ -1800,7 +1801,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565473193530779669}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13eef098701444ff8a1ee92f652d1e50, type: 3}
   m_Name: 
