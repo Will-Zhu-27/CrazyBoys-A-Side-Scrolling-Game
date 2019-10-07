@@ -11,6 +11,7 @@ public class PlayerIKController : MonoBehaviour
     public bool isHeadWatch = true;
     public bool isLeftHandToward = true;
     public bool isRightHandToward = true;
+    public float rightHandRotationWeight;
     public Transform rightHandObj;
     
     // Start is called before the first frame update
@@ -32,17 +33,19 @@ public class PlayerIKController : MonoBehaviour
             {
                 animator.SetLookAtWeight(0);
             }
-            if (isRightHandToward) {
+            if (isRightHandToward && !animator.GetCurrentAnimatorStateInfo(0).IsName("Walking Turn 180")) {
                 animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
                 animator.SetIKPosition(AvatarIKGoal.RightHand, lookObj.position);
-                animator.SetIKRotationWeight(AvatarIKGoal.RightHand,0);              
+                animator.SetIKRotationWeight(AvatarIKGoal.RightHand,rightHandRotationWeight);              
             } else {
-
+                animator.SetIKPositionWeight(AvatarIKGoal.RightHand,0);
+                animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
             }
 
         } else {
             animator.SetLookAtWeight(0);
             animator.SetIKPositionWeight(AvatarIKGoal.RightHand,0);
+            animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
         }
     }    
 }
