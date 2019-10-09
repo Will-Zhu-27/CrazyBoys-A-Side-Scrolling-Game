@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode shootingKeyCode = KeyCode.Mouse0;
     [SerializeField] private Transform trackObj;
     [SerializeField] private float trunAroundThreshold = 0f;
-    [SerializeField] private float turnAroundSpeed = 0.01f;
     [SerializeField] private float turnAroundTime = 0.3f;
     private CharacterController characterController;
     private Animator animator;

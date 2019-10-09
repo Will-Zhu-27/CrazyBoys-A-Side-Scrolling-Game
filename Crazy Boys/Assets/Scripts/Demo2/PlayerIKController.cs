@@ -49,7 +49,12 @@ public class PlayerIKController : MonoBehaviour
             if (isRightHandToward) {
                 animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
                 animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandAim.position);
-                animator.SetIKRotationWeight(AvatarIKGoal.RightHand,rightHandRotationWeight);              
+                animator.SetIKRotationWeight(AvatarIKGoal.RightHand, rightHandRotationWeight);
+                animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandAim.rotation);
+                // animator.SetBoneLocalRotation(HumanBodyBones.RightHand, Quaternion.identity);
+                // animator.SetBoneLocalRotation(HumanBodyBones.RightShoulder, Quaternion.identity);
+                // animator.SetBoneLocalRotation(HumanBodyBones.RightUpperArm, Quaternion.identity);
+                // animator.SetBoneLocalRotation(HumanBodyBones.RightLowerArm, Quaternion.identity);
             } else {
                 animator.SetIKPositionWeight(AvatarIKGoal.RightHand,0);
                 animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);

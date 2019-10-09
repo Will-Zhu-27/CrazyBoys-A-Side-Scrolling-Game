@@ -16,6 +16,9 @@ public class TowardsMouse : MonoBehaviour
     private Vector3 mousePositionOnScreen;
     private Vector3 mousePositionInWorld;
 
+    public Transform rightHand;
+    public Vector3 rightAimOffset = Vector3.zero;
+
     // Update is called once per frame
     void Update()
     {
@@ -36,7 +39,7 @@ public class TowardsMouse : MonoBehaviour
             mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePositionOnScreen);
             leftShoulderWatchPoint.position = mousePositionInWorld;
             // HandleRightShoulderWatchPoint();
-            HandleWatchPoint(leftShoulder, leftShoulderWatchPoint, leftShoulderWatchPointFactor);  
+            HandleWatchPoint(leftShoulder, leftShoulderWatchPoint, leftShoulderWatchPointFactor, Vector3.zero);  
         }
 
         // right hand point
@@ -45,7 +48,7 @@ public class TowardsMouse : MonoBehaviour
             mousePositionOnScreen.z = screenPostion.z;
             mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePositionOnScreen);
             rightShoulderWatchPoint.position = mousePositionInWorld;
-            HandleWatchPoint(rightShoulder, rightShoulderWatchPoint, rightShoulderWatchPointFactor);  
+            HandleWatchPoint(rightShoulder, rightShoulderWatchPoint, rightShoulderWatchPointFactor, rightAimOffset);  
         }
     }
 
@@ -54,8 +57,15 @@ public class TowardsMouse : MonoBehaviour
         rightShoulderWatchPoint.position = rightShoulder.position + direction * rightShoulderWatchPointFactor;
     }
 
-    void HandleWatchPoint(Transform start, Transform end, float factor) {
-        Vector3 direction = (end.position - start.position).normalized;
+    void HandleWatchPoint(Transform start, Transform end, float factor, Vector3 offset) {
+        // Vector3 direction = (end.position - start.position).normalized;
+        Vector3 direction = new Vector3(end.position.x - start.position.x, end.position.y - start.position.y, 0).normalized;
         end.position = start.position + direction * factor;
+        // end.LookAt(start.position);
+        // end.rotation = start.rotation;
+        // end.rotation = rightHand.rotation;
+        // end.RotateAround(end.position, end.TransformDirection(Vector3.up), 90);
+        
+        end.rotation = Quaternion.LookRotation(end.position - start.position, this.transform.up + this.transform.TransformDirection(offset));
     }
 }
