@@ -9,15 +9,16 @@ public class TowardsMouse : MonoBehaviour
     [SerializeField] private Transform leftShoulder;
     [SerializeField] private Transform leftShoulderWatchPoint;
     [SerializeField] private float leftShoulderWatchPointFactor;
+    [SerializeField] private Vector3 leftShoulderWatchPointRotationOffset = new Vector3(-90f, 0f, 0f);
     [SerializeField] private Transform rightShoulder;
     [SerializeField] private Transform rightShoulderWatchPoint;
     [SerializeField] private float rightShoulderWatchPointFactor;
+    [SerializeField] private Vector3 rightShoulderWatchPointRotationOffset = new Vector3(90f, 0f, 0f);
     private Vector3 screenPostion;
     private Vector3 mousePositionOnScreen;
     private Vector3 mousePositionInWorld;
 
-    public Transform rightHand;
-    public Vector3 rightAimOffset = Vector3.zero;
+    
 
     // Update is called once per frame
     void Update()
@@ -28,7 +29,7 @@ public class TowardsMouse : MonoBehaviour
             screenPostion = Camera.main.WorldToScreenPoint(eyePoint.position);
             mousePositionOnScreen.z = screenPostion.z;
             mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePositionOnScreen);
-            watchPoint.position = mousePositionInWorld;
+            watchPoint.position = new Vector3(mousePositionInWorld.x, mousePositionInWorld.y, eyePoint.position.z);
         }
        
 
@@ -38,8 +39,7 @@ public class TowardsMouse : MonoBehaviour
             mousePositionOnScreen.z = screenPostion.z;
             mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePositionOnScreen);
             leftShoulderWatchPoint.position = mousePositionInWorld;
-            // HandleRightShoulderWatchPoint();
-            HandleWatchPoint(leftShoulder, leftShoulderWatchPoint, leftShoulderWatchPointFactor, Vector3.zero);  
+            HandleWatchPoint(leftShoulder, leftShoulderWatchPoint, leftShoulderWatchPointFactor, leftShoulderWatchPointRotationOffset);  
         }
 
         // right hand point
@@ -48,7 +48,7 @@ public class TowardsMouse : MonoBehaviour
             mousePositionOnScreen.z = screenPostion.z;
             mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePositionOnScreen);
             rightShoulderWatchPoint.position = mousePositionInWorld;
-            HandleWatchPoint(rightShoulder, rightShoulderWatchPoint, rightShoulderWatchPointFactor, rightAimOffset);  
+            HandleWatchPoint(rightShoulder, rightShoulderWatchPoint, rightShoulderWatchPointFactor, rightShoulderWatchPointRotationOffset);  
         }
     }
 
@@ -57,15 +57,9 @@ public class TowardsMouse : MonoBehaviour
         rightShoulderWatchPoint.position = rightShoulder.position + direction * rightShoulderWatchPointFactor;
     }
 
-    void HandleWatchPoint(Transform start, Transform end, float factor, Vector3 offset) {
-        // Vector3 direction = (end.position - start.position).normalized;
+    void HandleWatchPoint(Transform start, Transform end, float factor, Vector3 rotationOffset) {
         Vector3 direction = new Vector3(end.position.x - start.position.x, end.position.y - start.position.y, 0).normalized;
         end.position = start.position + direction * factor;
-        // end.LookAt(start.position);
-        // end.rotation = start.rotation;
-        // end.rotation = rightHand.rotation;
-        // end.RotateAround(end.position, end.TransformDirection(Vector3.up), 90);
-        
-        end.rotation = Quaternion.LookRotation(end.position - start.position, this.transform.up + this.transform.TransformDirection(offset));
+        end.rotation = Quaternion.LookRotation(end.position - start.position, this.transform.up + this.transform.TransformDirection(rotationOffset));
     }
 }

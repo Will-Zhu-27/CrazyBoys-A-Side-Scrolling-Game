@@ -40,7 +40,9 @@ public class PlayerIKController : MonoBehaviour
             if (isLeftHandToward) {
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
                 animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandAim.position);
-                animator.SetIKRotationWeight(AvatarIKGoal.LeftHand,leftHandRotationWeight);  
+                animator.SetIKRotationWeight(AvatarIKGoal.LeftHand,leftHandRotationWeight);
+                animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftHandRotationWeight);
+                animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandAim.rotation);
             } else {
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftHand,0);
                 animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0);
@@ -51,10 +53,6 @@ public class PlayerIKController : MonoBehaviour
                 animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandAim.position);
                 animator.SetIKRotationWeight(AvatarIKGoal.RightHand, rightHandRotationWeight);
                 animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandAim.rotation);
-                // animator.SetBoneLocalRotation(HumanBodyBones.RightHand, Quaternion.identity);
-                // animator.SetBoneLocalRotation(HumanBodyBones.RightShoulder, Quaternion.identity);
-                // animator.SetBoneLocalRotation(HumanBodyBones.RightUpperArm, Quaternion.identity);
-                // animator.SetBoneLocalRotation(HumanBodyBones.RightLowerArm, Quaternion.identity);
             } else {
                 animator.SetIKPositionWeight(AvatarIKGoal.RightHand,0);
                 animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
