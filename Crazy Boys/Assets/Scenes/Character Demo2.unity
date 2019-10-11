@@ -2100,6 +2100,8 @@ MonoBehaviour:
   trackObj: {fileID: 228680626}
   trunAroundThreshold: -0.1
   turnAroundTime: 0.3
+  standColliderHeight: 1.81
+  crouchingColliderHeight: 1.27
 --- !u!143 &565473193530779671
 CharacterController:
   m_ObjectHideFlags: 0

@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform trackObj;
     [SerializeField] private float trunAroundThreshold = 0f;
     [SerializeField] private float turnAroundTime = 0.3f;
+    [SerializeField] private float standColliderHeight = 1.85f;
+    [SerializeField] private float crouchingColliderHeight = 0.9f;
+    // [SerializeField] private Vector3 standColliderCenter = new Vector3(0f, 0.925f, 0f);
+    // [SerializeField] private Vector3 crouchingColliderCenter = new Vector3(0f, 0.5f, 0f);
     private CharacterController characterController;
     private Animator animator;
     private float forwardMoveInput;
@@ -42,6 +46,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        CroushOnCharacterController(this.isCrouch);
         animator = GetComponent<Animator>();
         forwardMoveId = Animator.StringToHash("forwardMove");
         isCrouchId = Animator.StringToHash("isCrouch");
@@ -91,9 +96,11 @@ public class PlayerController : MonoBehaviour
         // judge crouch
         if (Input.GetKeyDown(crouchKeyCode)) {
             isCrouch = true;
+
         } else if (Input.GetKeyUp(crouchKeyCode)) {
             isCrouch = false;
         }
+        CroushOnCharacterController(isCrouch);
         animator.SetBool(isCrouchId, isCrouch);
 
         // judge run
@@ -141,6 +148,16 @@ public class PlayerController : MonoBehaviour
         if (this.transform.rotation.eulerAngles.Equals(targetDirection)) {
             isTurningAround = false;
             isFaceForward = !isFaceForward;
+        }
+    }
+
+    private void CroushOnCharacterController(bool isCrouch) {
+        if (isCrouch) {
+            this.characterController.center = new Vector3(0f, this.crouchingColliderHeight/2, 0f);
+            this.characterController.height = this.crouchingColliderHeight;
+        } else {
+            this.characterController.center = new Vector3(0f, this.standColliderHeight/2, 0f);
+            this.characterController.height = this.standColliderHeight;
         }
     }
 }
