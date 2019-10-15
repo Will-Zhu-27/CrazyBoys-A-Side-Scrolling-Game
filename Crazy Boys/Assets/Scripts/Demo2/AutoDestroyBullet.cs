@@ -10,7 +10,7 @@ public class AutoDestroyBullet : MonoBehaviour
         mainCamera = this.GetComponent<Camera>();
     }
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         GameObject[] bulletList =  GameObject.FindGameObjectsWithTag("Bullet");
         int length = bulletList.Length;

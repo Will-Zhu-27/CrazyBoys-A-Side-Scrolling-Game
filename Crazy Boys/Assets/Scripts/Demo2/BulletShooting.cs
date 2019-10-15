@@ -5,12 +5,12 @@ using UnityEngine;
 public class BulletShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public Transform bulletSpawn;
-    public Transform bulletAim;
+    public Transform rightBulletSpawn;
+    public Transform leftBulletSpawn;
     [SerializeField] private KeyCode shootingKeyCode = KeyCode.Mouse0 ;
-    [SerializeField] private float bulletSpeed = 15f;
+    [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private Vector3 bulletRotationOffset = Vector3.zero;
-
+    private bool isRightShooting = true;
 
     // Start is called before the first frame update
 
@@ -19,15 +19,20 @@ public class BulletShooting : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(shootingKeyCode)) {
-            Vector3 rotation = bulletSpawn.rotation.eulerAngles + bulletRotationOffset;
+            Transform start = null;
+            if (isRightShooting) {
+                start = rightBulletSpawn;
+            } else {
+                start = leftBulletSpawn;
+            }
+            Vector3 rotation = start.rotation.eulerAngles + bulletRotationOffset;
             Quaternion quaternion = Quaternion.Euler(rotation);
 
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, quaternion);
-            // bullet.transform.LookAt(bulletAim);
+            GameObject bullet = Instantiate(bulletPrefab, start.position, quaternion);
             Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
 
-            bulletRigidbody.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
-            // Physics.IgnoreCollision(bulletRigidbody, bulletSpawn.GetComponent)
+            bulletRigidbody.AddForce(start.forward * bulletSpeed, ForceMode.Impulse);
+            isRightShooting = !isRightShooting;
         }
     }
 }

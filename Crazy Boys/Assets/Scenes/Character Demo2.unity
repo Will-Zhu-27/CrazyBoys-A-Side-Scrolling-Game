@@ -501,14 +501,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
     type: 3}
-  bulletSpawn: {fileID: 2105650295}
-  bulletAim: {fileID: 1079429266}
+  rightBulletSpawn: {fileID: 2105650295}
+  leftBulletSpawn: {fileID: 1123505545}
   shootingKeyCode: 323
-  bulletSpeed: 1
+  bulletSpeed: 15
   bulletRotationOffset: {x: 90, y: 0, z: 0}
---- !u!4 &1079429266 stripped
+--- !u!4 &1123505545 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1074792657440496892, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+  m_CorrespondingSourceObject: {fileID: 662760208676633226, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
     type: 3}
   m_PrefabInstance: {fileID: 662760207304006549}
   m_PrefabAsset: {fileID: 0}
@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookAtCharacter: {fileID: 565473193531216025}
-  smoothSpeed: 0.125
+  smoothSpeed: 0.1
 --- !u!114 &1407384064
 MonoBehaviour:
   m_ObjectHideFlags: 0
