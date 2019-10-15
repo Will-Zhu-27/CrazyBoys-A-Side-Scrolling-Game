@@ -501,11 +501,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
     type: 3}
-  rightBulletSpawn: {fileID: 2105650295}
+  rightBulletSpawn: {fileID: 894196087}
+  rightBulletRotation: {fileID: 894196087}
   leftBulletSpawn: {fileID: 1123505545}
   shootingKeyCode: 323
-  bulletSpeed: 15
+  bulletSpeed: 1
   bulletRotationOffset: {x: 90, y: 0, z: 0}
+--- !u!4 &894196087 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 662760208711815781, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 662760207304006549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1123505545 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 662760208676633226, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
@@ -999,12 +1006,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2105650295 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 662760206817310515, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 662760207304006549}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &565473193531216025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1074792657440574220, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
@@ -1021,6 +1022,11 @@ PrefabInstance:
     - target: {fileID: 1074792657440928640, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928640, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1074792657440574220, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
@@ -1154,3 +1160,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f0e8bc8900e543a7a01f811b850edd5, type: 3}
+--- !u!1 &8742389094115773472 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
+    type: 3}
+  m_PrefabInstance: {fileID: 8231119947700875432}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &8742389094115773473
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8742389094115773472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0068473867
+  m_Height: 0.03648497
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

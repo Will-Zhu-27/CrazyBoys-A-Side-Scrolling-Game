@@ -6,6 +6,7 @@ public class BulletShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform rightBulletSpawn;
+    public Transform rightBulletRotation;
     public Transform leftBulletSpawn;
     [SerializeField] private KeyCode shootingKeyCode = KeyCode.Mouse0 ;
     [SerializeField] private float bulletSpeed = 10f;
@@ -25,10 +26,9 @@ public class BulletShooting : MonoBehaviour
             } else {
                 start = leftBulletSpawn;
             }
-            Vector3 rotation = start.rotation.eulerAngles + bulletRotationOffset;
-            Quaternion quaternion = Quaternion.Euler(rotation);
 
-            GameObject bullet = Instantiate(bulletPrefab, start.position, quaternion);
+            GameObject bullet = Instantiate(bulletPrefab, start.position, start.rotation);
+            bullet.transform.Rotate(bulletRotationOffset);
             Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
 
             bulletRigidbody.AddForce(start.forward * bulletSpeed, ForceMode.Impulse);
