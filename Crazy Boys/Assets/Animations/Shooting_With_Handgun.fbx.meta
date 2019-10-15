@@ -5,10 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: RIght Handgun Shooting
-  - first:
-      74: -4313707927478890028
-    second: Left Handgun Shooting
+    second: mixamo.com
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -38,7 +35,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: RIght Handgun Shooting
+      name: mixamo.com
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
@@ -50,168 +47,19 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Left Handgun Shooting
-      takeName: mixamo.com
-      internalID: -4313707927478890028
-      firstFrame: 0
-      lastFrame: 70
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 1
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Root
-        weight: 1
-      - path: Root/Hips
-        weight: 1
-      - path: Root/Hips/mixamo:SM_Item_Hacksaw_01
-        weight: 0
-      - path: Root/Hips/mixamo:SM_Item_Handcuffs_01
-        weight: 0
-      - path: Root/Hips/mixamo:SM_Item_Mallet_01
-        weight: 0
-      - path: Root/Hips/mixamo:SM_Item_Pouch_01
-        weight: 0
-      - path: Root/Hips/mixamo:SM_Item_Rope_01
-        weight: 0
-      - path: Root/Hips/mixamo:SM_Item_WalkieTalkie_01
-        weight: 0
-      - path: Root/Hips/mixamo:SM_Item_Wirecutter_01
-        weight: 0
-      - path: Root/Hips/mixamo:SM_Item_Wrench_01
-        weight: 0
-      - path: Root/Hips/mixamo:SM_Item_ZipTies_01
-        weight: 0
-      - path: Root/Hips/Spine_01
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Finger_01
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Finger_01/Finger_02
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Finger_01/Finger_02/Finger_03
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Finger_01/Finger_02/Finger_03/Finger_04
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/IndexFinger_01
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/IndexFinger_01/IndexFinger_02
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/IndexFinger_01/IndexFinger_02/IndexFinger_03
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/IndexFinger_01/IndexFinger_02/IndexFinger_03/IndexFinger_04
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Thumb_01
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Thumb_01/Thumb_02
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Thumb_01/Thumb_02/Thumb_03
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Finger_011
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Finger_011/Finger_021
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Finger_011/Finger_021/Finger_031
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Finger_011/Finger_021/Finger_031/Finger_041
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/IndexFinger_011
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/IndexFinger_011/IndexFinger_021
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/IndexFinger_011/IndexFinger_021/IndexFinger_031
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/IndexFinger_011/IndexFinger_021/IndexFinger_031/IndexFinger_041
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Thumb_011
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Thumb_011/Thumb_021
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Thumb_011/Thumb_021/Thumb_031
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head
-        weight: 1
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/Eyebrows
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/Eyes
-        weight: 0
-      - path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/mixamo:Item_Swat_Glass
-        weight: 0
-      - path: Root/Hips/UpperLeg_L
-        weight: 1
-      - path: Root/Hips/UpperLeg_L/LowerLeg_L
-        weight: 1
-      - path: Root/Hips/UpperLeg_L/LowerLeg_L/Ankle_L
-        weight: 1
-      - path: Root/Hips/UpperLeg_L/LowerLeg_L/Ankle_L/Ball_L
-        weight: 1
-      - path: Root/Hips/UpperLeg_L/LowerLeg_L/Ankle_L/Ball_L/Toes_L
-        weight: 0
-      - path: Root/Hips/UpperLeg_R
-        weight: 1
-      - path: Root/Hips/UpperLeg_R/LowerLeg_R
-        weight: 1
-      - path: Root/Hips/UpperLeg_R/LowerLeg_R/Ankle_R
-        weight: 1
-      - path: Root/Hips/UpperLeg_R/LowerLeg_R/Ankle_R/Ball_R
-        weight: 1
-      - path: Root/Hips/UpperLeg_R/LowerLeg_R/Ankle_R/Ball_R/Toes_R
-        weight: 0
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
