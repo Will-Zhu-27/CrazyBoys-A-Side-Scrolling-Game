@@ -62,7 +62,7 @@ public class FieldOfView : MonoBehaviour
             }
             else
             {
-                Debug.Log("~~~~~~~~");
+                // Debug.Log("~~~~~~~~");
             }
         }
     }

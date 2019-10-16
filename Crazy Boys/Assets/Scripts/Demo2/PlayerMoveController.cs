@@ -24,7 +24,9 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] private float trunAroundThreshold = -0.1f;
     [SerializeField] private float turnAroundTime = 0.3f;
     [SerializeField] private float standColliderHeight = 1.81f;
+    [SerializeField] private Vector3 standColliderCenter = Vector3.zero;
     [SerializeField] private float crouchingColliderHeight = 1.27f;
+    [SerializeField] private Vector3 crouchingColliderCenter = Vector3.zero;
     private CharacterController characterController;
     private Animator animator;
     private float forwardMoveInput;
@@ -57,6 +59,9 @@ public class PlayerMoveController : MonoBehaviour
         HandleUserInput();
         AutoTurnAround();
         CharacterMove();
+        // if (!characterController.isGrounded) {
+        //     Debug.Log("play is not at ground!");
+        // }
     }
 
     private void CharacterMove() {
@@ -151,10 +156,10 @@ public class PlayerMoveController : MonoBehaviour
 
     private void CroushOnCharacterController(bool isCrouch) {
         if (isCrouch) {
-            this.characterController.center = new Vector3(0f, this.crouchingColliderHeight/2, 0f);
+            this.characterController.center = crouchingColliderCenter;
             this.characterController.height = this.crouchingColliderHeight;
         } else {
-            this.characterController.center = new Vector3(0f, this.standColliderHeight/2, 0f);
+            this.characterController.center = standColliderCenter;
             this.characterController.height = this.standColliderHeight;
         }
     }
