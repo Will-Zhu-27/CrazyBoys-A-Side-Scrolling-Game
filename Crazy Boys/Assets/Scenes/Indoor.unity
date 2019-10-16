@@ -25161,6 +25161,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.999998, y: 3.0000002, z: 0.15777397}
   m_Center: {x: -2.4999971, y: 1.5000001, z: 0.078886986}
+--- !u!1 &1070823231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100468, guid: cf78ac9b09f3f284f8988b9e77af54bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 861805018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1070823233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070823231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c04524af8817cb4faf25761cdaa665c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 10
+  viewAngle: 360
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  targetPlayer: {fileID: 0}
+  enemyEyesPosition: {x: 0, y: 0, z: 0}
+  playerHeadPosition: {x: 0, y: 0, z: 0}
+  charactoerHeight: 1.7
 --- !u!1001 &1074061552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31665,6 +31695,8 @@ MonoBehaviour:
     m_Bits: 256
   targetPlayer: {fileID: 0}
   enemyEyesPosition: {x: 0, y: 0, z: 0}
+  playerHeadPosition: {x: 0, y: 0, z: 0}
+  charactoerHeight: 1.8
 --- !u!1001 &1391430044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31690,7 +31722,7 @@ PrefabInstance:
     - target: {fileID: 1074792657440574220, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.79
+      value: 15.13
       objectReference: {fileID: 0}
     - target: {fileID: 1074792657440574220, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
         type: 3}
@@ -41286,6 +41318,8 @@ MonoBehaviour:
     m_Bits: 256
   targetPlayer: {fileID: 0}
   enemyEyesPosition: {x: 0, y: 0, z: 0}
+  playerHeadPosition: {x: 0, y: 0, z: 0}
+  charactoerHeight: 1.8
 --- !u!54 &1847618206
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43441,7 +43475,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
