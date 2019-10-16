@@ -18,10 +18,8 @@ public class AutoDestroyBullet : MonoBehaviour
             return;
         } else {
             for (int i = 0; i < length; i++) {
-                // Debug.Log(mainCamera.WorldToViewportPoint(bulletList[i].transform.position));
                 Vector3 position = mainCamera.WorldToViewportPoint(bulletList[i].transform.position);
                 if (!(position.x >= 0 && position.x <= 1 && position.y >= 0 && position.y <= 1 && position.z >= 0)) {
-                    
                     Destroy(bulletList[i]);
                 }
             }
