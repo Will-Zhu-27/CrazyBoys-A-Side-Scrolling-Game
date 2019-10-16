@@ -8,7 +8,8 @@ public class CameraFollow : MonoBehaviour
     public float smoothSpeed = 0.125f;
     private Vector3 posOffset;
     void Start() {
-        posOffset = this.transform.position - lookAtCharacter.position;
+        //posOffset = this.transform.position - lookAtCharacter.position;
+        posOffset = new Vector3(0, 0, -8);
     }
     void LateUpdate()
     {
