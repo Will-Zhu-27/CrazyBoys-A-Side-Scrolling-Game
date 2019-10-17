@@ -10,6 +10,8 @@ public class BulletCollisionResponse : MonoBehaviour
         if (col.tag == "Enemy") {
             col.GetComponent<Enemy>().TakeDamage(damage);
             print("hit damage!");
+        } else if (col.tag == "Player") {
+            col.GetComponent<PlayerStatus>().TakeDamage(damage);
         }
 
         // Debug.Log("hit!");

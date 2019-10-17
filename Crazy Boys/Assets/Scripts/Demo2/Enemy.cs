@@ -8,6 +8,10 @@ public class Enemy : MonoBehaviour
     // public Transform skin;
     public int maxHp = 100;
     [SerializeField] private int currentHp;
+    public Transform bulletSpawn;
+    public GameObject bulletPrefab;
+    [SerializeField] private float bulletSpeed = 15f;
+    [SerializeField] private Vector3 bulletRotationOffset = new Vector3(90, 0, 0);
     private Animator animator;
     private float tempTime = 0;
     private float alpha;
@@ -71,6 +75,10 @@ public class Enemy : MonoBehaviour
     /// “Gunplay” Clip Event
     /// </summary> 
     private void ShootingEvent() {
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        bullet.transform.Rotate(bulletRotationOffset);
+        Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
 
+        bulletRigidbody.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
     }
 }
