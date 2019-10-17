@@ -20,7 +20,7 @@ public class AutoDestroyBullet : MonoBehaviour
             for (int i = 0; i < length; i++) {
                 Vector3 position = mainCamera.WorldToViewportPoint(bulletList[i].transform.position);
                 if (!(position.x >= 0 && position.x <= 1 && position.y >= 0 && position.y <= 1 && position.z >= 0)) {
-                    Destroy(bulletList[i]);
+                    Destroy(bulletList[i], 0.3f);
                 }
             }
         }
