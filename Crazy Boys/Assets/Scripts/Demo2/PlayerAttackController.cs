@@ -68,11 +68,11 @@ public class PlayerAttackController : MonoBehaviour
         animator.SetBool(isKickId, isKick);
     }
 
-    private void KickStart() {
+    private void KickStartEvent() {
         meleeScript.gameObject.SetActive(true);
     }
 
-    private void KickEnd() {
+    private void KickEndEvent() {
         meleeScript.gameObject.SetActive(false);
     }
 

@@ -5,17 +5,29 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
-    public Transform skin;
+    // public Transform skin;
     public int maxHp = 100;
     [SerializeField] private int currentHp;
     private Animator animator;
     private float tempTime = 0;
     private float alpha;
     private bool isDie = false;
+    private bool isShooting = false;
+    private int isShootingId;
 
     private void Start() {
         currentHp = maxHp;
         animator = this.GetComponent<Animator>();
+        isShootingId = Animator.StringToHash("isShooting");
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.G)) {
+            isShooting = true;
+        } else if (Input.GetKeyUp(KeyCode.G)) {
+            isShooting = false;
+        }
+        animator.SetBool(isShootingId, isShooting);
     }
 
     public void TakeDamage(int damage) {
@@ -28,7 +40,13 @@ public class Enemy : MonoBehaviour
     }
 
     private void Die() {
-        animator.Play("Falling Back Death");
+        float tep = Random.Range(0f, 1f);
+        if (tep > 0.5) {
+            animator.Play("Falling Back Death");
+        } else {
+            animator.Play("Falling Forward Death");
+        }
+        
         // StartCoroutine(DestroyAfterAnimation("Falling Back Death"));
         // isDie = true;
         // print(skin.GetComponent<SkinnedMeshRenderer>().material.color);
@@ -41,15 +59,18 @@ public class Enemy : MonoBehaviour
     //     }
     //     Destroy(this.gameObject);
     // }
+
+    /// <summary> 
+    /// “Falling Back Death” Clip Event
+    /// </summary> 
     private void MissionComplete() {
         Destroy(this.gameObject);
     }
-    // private void OnTriggerEnter(Collider col)
-    // {
-    //     if (col.tag == "Melee") {
-    //         print("I am kicked!");
-    //         col.GetComponentInParent()
-    //     }
 
-    // }
+    /// <summary> 
+    /// “Gunplay” Clip Event
+    /// </summary> 
+    private void ShootingEvent() {
+
+    }
 }

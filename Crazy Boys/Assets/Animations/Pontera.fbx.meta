@@ -60,14 +60,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.3108108
-        functionName: KickStart
+        functionName: KickStartEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6373874
-        functionName: KickEnd
+        functionName: KickEndEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
