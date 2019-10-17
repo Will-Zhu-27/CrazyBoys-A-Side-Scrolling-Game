@@ -6,11 +6,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Enemy))]
-public class FieldOfView : MonoBehaviour {
+public class EnemyFieldOfView : MonoBehaviour {
 
 	public float viewRadius;
 	[Range(0,360)]
 	public float viewAngle;
+	[SerializeField] private float responseTime = 0.2f;
 
 	public LayerMask targetMask;
 	public LayerMask obstacleMask;
@@ -21,7 +22,7 @@ public class FieldOfView : MonoBehaviour {
 
 	void Start() {
 		enemy = GetComponent<Enemy>();
-		StartCoroutine ("FindTargetsWithDelay", .2f);
+		StartCoroutine ("FindTargetsWithDelay", responseTime);
 	}
 
 

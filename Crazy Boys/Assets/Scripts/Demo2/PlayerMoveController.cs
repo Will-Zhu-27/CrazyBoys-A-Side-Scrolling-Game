@@ -8,6 +8,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(BoxCollider))]
 public class PlayerMoveController : MonoBehaviour
 {
     [SerializeField] private bool isFaceForward = true;
@@ -25,10 +26,15 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] private float turnAroundTime = 0.3f;
     [SerializeField] private float standColliderHeight = 1.81f;
     [SerializeField] private Vector3 standColliderCenter = Vector3.zero;
+    private Vector3 standHitBoxCenter;
+    private Vector3 standHitBoxSize;
     [SerializeField] private float crouchingColliderHeight = 1.27f;
     [SerializeField] private Vector3 crouchingColliderCenter = Vector3.zero;
+    [SerializeField] private Vector3 crouchHitBoxCenter = Vector3.zero;
+    [SerializeField] private Vector3 crouchHitBoxSize = Vector3.zero;
     private CharacterController characterController;
     private Animator animator;
+    private BoxCollider hitBox;
     private float forwardMoveInput;
     private int forwardMoveId;
     private int isCrouchId;
@@ -46,7 +52,10 @@ public class PlayerMoveController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        CroushOnCharacterController(this.isCrouch);
+        hitBox = this.GetComponent<BoxCollider>();
+        standHitBoxCenter = hitBox.center;
+        standHitBoxSize = hitBox.size;
+        CroushOnCollider(this.isCrouch);
         animator = GetComponent<Animator>();
         forwardMoveId = Animator.StringToHash("forwardMove");
         isCrouchId = Animator.StringToHash("isCrouch");
@@ -107,7 +116,7 @@ public class PlayerMoveController : MonoBehaviour
         } else if (Input.GetKeyUp(crouchKeyCode)) {
             isCrouch = false;
         }
-        CroushOnCharacterController(isCrouch);
+        CroushOnCollider(isCrouch);
         animator.SetBool(isCrouchId, isCrouch);
 
         // judge run
@@ -158,13 +167,17 @@ public class PlayerMoveController : MonoBehaviour
         }
     }
 
-    private void CroushOnCharacterController(bool isCrouch) {
+    private void CroushOnCollider(bool isCrouch) {
         if (isCrouch) {
             this.characterController.center = crouchingColliderCenter;
             this.characterController.height = this.crouchingColliderHeight;
+            this.hitBox.center = this.crouchHitBoxCenter;
+            this.hitBox.size = this.crouchHitBoxSize;
         } else {
             this.characterController.center = standColliderCenter;
             this.characterController.height = this.standColliderHeight;
+            this.hitBox.center = this.standHitBoxCenter;
+            this.hitBox.size = this.standHitBoxSize;
         }
     }
 }
