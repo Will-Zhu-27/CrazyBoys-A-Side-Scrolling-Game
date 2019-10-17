@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &69352535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69352536}
+  - component: {fileID: 69352537}
+  m_Layer: 0
+  m_Name: Right Leg Collider
+  m_TagString: Melee
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &69352536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69352535}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1074792657440481614}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &69352537
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69352535}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 46.01494, y: 20.098375, z: 7.79783}
+  m_Center: {x: -22.50747, y: -0.6519909, z: 0.6085962}
 --- !u!1 &662760206681408818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,6 +1345,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1074792657440597250}
+  - {fileID: 69352536}
   m_Father: {fileID: 1074792657440496892}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3896,7 +3941,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.925, z: 0}
+  m_Center: {x: 0, y: 0.965, z: 0}
 --- !u!114 &1074792657440928643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3923,7 +3968,9 @@ MonoBehaviour:
   trunAroundThreshold: -0.1
   turnAroundTime: 0.3
   standColliderHeight: 1.81
-  crouchingColliderHeight: 1.27
+  standColliderCenter: {x: 0, y: 0.965, z: 0}
+  crouchingColliderHeight: 1.2
+  crouchingColliderCenter: {x: 0, y: 0.67, z: 0}
 --- !u!114 &1074792657440928652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3979,7 +4026,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4075,10 +4122,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a91b29480622d1429a61ac635e850cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meleeAttackKeyCode: 327
+  rightLeg: {fileID: 0}
   bulletPrefab: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
     type: 3}
   rightBulletSpawn: {fileID: 662760208711815781}
-  leftBulletSpawn: {fileID: 662760208676633226}
+  leftBulletSpawn: {fileID: 662760206681408829}
   shootingKeyCode: 323
   handgunShoot: {fileID: 8300000, guid: 1b145bcffd767854fb0c71c37678ebaa, type: 3}
   reloadingKeyCode: 114

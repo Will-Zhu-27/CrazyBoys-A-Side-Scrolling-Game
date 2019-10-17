@@ -7,6 +7,9 @@ using UnityEngine;
 public class PlayerAttackController : MonoBehaviour
 {
     [SerializeField] private KeyCode meleeAttackKeyCode = KeyCode.F;
+    public int meleeDamage = 100;
+    public Melee meleeScript;
+    // public GameObject melee;
     public GameObject bulletPrefab;
     public Transform rightBulletSpawn;
     public Transform leftBulletSpawn;
@@ -27,6 +30,8 @@ public class PlayerAttackController : MonoBehaviour
         audioSource = this.GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         isKickId = Animator.StringToHash("isKick");
+        meleeScript.meleeDamage = this.meleeDamage;
+        meleeScript.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -56,12 +61,19 @@ public class PlayerAttackController : MonoBehaviour
             }
         }
         if (Input.GetKeyDown(meleeAttackKeyCode)) {
-            // animator.Play("kick");
             isKick = true;
         } else if (Input.GetKeyUp(meleeAttackKeyCode)) {
             isKick = false;
         }
         animator.SetBool(isKickId, isKick);
+    }
+
+    private void KickStart() {
+        meleeScript.gameObject.SetActive(true);
+    }
+
+    private void KickEnd() {
+        meleeScript.gameObject.SetActive(false);
     }
 
 }
