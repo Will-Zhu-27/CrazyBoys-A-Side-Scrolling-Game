@@ -65,6 +65,10 @@ public class PlayerMoveController : MonoBehaviour
     }
 
     private void CharacterMove() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Kick")) {
+            animator.SetBool(isCrouchId, false);
+            return;
+        }
         if (isTurningAround) {
             return;
         }

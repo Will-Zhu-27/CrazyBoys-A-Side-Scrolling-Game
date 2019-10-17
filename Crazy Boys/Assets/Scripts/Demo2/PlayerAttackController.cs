@@ -63,4 +63,5 @@ public class PlayerAttackController : MonoBehaviour
         }
         animator.SetBool(isKickId, isKick);
     }
+
 }

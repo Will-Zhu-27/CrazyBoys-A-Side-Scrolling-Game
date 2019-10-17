@@ -1250,6 +1250,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 940471773, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
+      propertyPath: meleeAttackKeyCode
+      value: 327
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
 --- !u!1001 &8231119947700875432
