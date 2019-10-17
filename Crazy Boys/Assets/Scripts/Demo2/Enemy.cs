@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class Enemy : MonoBehaviour
 {
     // public Transform skin;
@@ -18,19 +19,27 @@ public class Enemy : MonoBehaviour
     private bool isDie = false;
     private bool isShooting = false;
     private int isShootingId;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip rifleShooting;
 
     private void Start() {
         currentHp = maxHp;
         animator = this.GetComponent<Animator>();
         isShootingId = Animator.StringToHash("isShooting");
+        audioSource = this.GetComponent<AudioSource>();
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.G)) {
-            isShooting = true;
-        } else if (Input.GetKeyUp(KeyCode.G)) {
-            isShooting = false;
-        }
+    // private void Update() {
+    //     if (Input.GetKeyDown(KeyCode.G)) {
+    //         isShooting = true;
+    //     } else if (Input.GetKeyUp(KeyCode.G)) {
+    //         isShooting = false;
+    //     }
+    //     animator.SetBool(isShootingId, isShooting);
+    // }
+
+    public void setIsShooting(bool isShooting) {
+        this.isShooting = isShooting;
         animator.SetBool(isShootingId, isShooting);
     }
 
@@ -78,7 +87,9 @@ public class Enemy : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
         bullet.transform.Rotate(bulletRotationOffset);
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
-
         bulletRigidbody.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
+
+        audioSource.clip = rifleShooting;
+        audioSource.Play();
     }
 }
