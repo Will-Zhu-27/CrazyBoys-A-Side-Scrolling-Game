@@ -32,6 +32,9 @@ public class Enemy : MonoBehaviour
     private int currentAttackTimes = 0;
 
     [HideInInspector] public bool isUnderRest = false;
+    public Transform target;
+    public Vector3 chestRotateOffset = Vector3.zero;
+    public Transform chest;
     private void Start() {
         currentHp = maxHp;
         animator = this.GetComponent<Animator>();
@@ -106,12 +109,37 @@ public class Enemy : MonoBehaviour
 
     void OnAnimatorIK() {
         if (ikActive && enemyFieldOfView.visibleTargets.Count != 0) {
+            Transform target = enemyFieldOfView.visibleTargets[0];
             if (isHeadWatch) {
                 animator.SetLookAtWeight(1);
                 animator.SetLookAtPosition(enemyFieldOfView.visibleTargets[0].position);
+                
+                
+               
             }
+            // Quaternion chestRotate = animator.GetBoneTransform(HumanBodyBones.Chest).rotation;
+            // animator.SetBoneLocalRotation(HumanBodyBones.Chest, Quaternion.Euler(this.chestRotateOffset));
+            // animator.GetBoneTransform(HumanBodyBones.UpperChest).rotation
+            
+            
         }
+
+        // Vector3 chestUp = target.position - animator.GetBoneTransform(HumanBodyBones.Chest).position;
+        // chestUp.z = target.position.z;
+        // Quaternion chestRotation = Quaternion.LookRotation(-Vector3.forward, chestUp);
+        // animator.SetBoneLocalRotation(HumanBodyBones.Chest, chestRotation);
+         
 	}
+
+    // void LateUpdate() {
+    //     // Vector3 up = target.position + this.chest.position;
+    //     // up.z = 0;
+    //     // Quaternion rotation = Quaternion.LookRotation(Vector3.forward, up);
+    //     // // this.chest.Rotate(rotation.eulerAngles);
+    //     // this.chest.rotation = rotation;
+    //     this.chest.LookAt(target.position);
+    //     this.chest.Rotate(chestRotateOffset);
+    // }
 
     IEnumerator Rest(float restTime) {
         this.setIsShooting(false);
