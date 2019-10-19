@@ -4,9 +4,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(EnemyFieldOfView))]
 public class Enemy : MonoBehaviour
 {
-    // public Transform skin;
     public int maxHp = 100;
     [SerializeField] private int currentHp;
     public Transform bulletSpawn;
@@ -17,16 +17,23 @@ public class Enemy : MonoBehaviour
     private float tempTime = 0;
     private float alpha;
     private bool isDie = false;
-    private bool isShooting = false;
+    [SerializeField] private bool isShooting = false;
     private int isShootingId;
     private AudioSource audioSource;
     [SerializeField] private AudioClip rifleShooting;
+    public bool ikActive = true;
+    public bool isHeadWatch = true;
+    private EnemyFieldOfView enemyFieldOfView;
+    public Transform lookAim;
+    public bool autoAttack = true;
 
     private void Start() {
         currentHp = maxHp;
         animator = this.GetComponent<Animator>();
         isShootingId = Animator.StringToHash("isShooting");
+        animator.SetBool(isShootingId, isShooting);
         audioSource = this.GetComponent<AudioSource>();
+        enemyFieldOfView = this.GetComponent<EnemyFieldOfView>();
     }
 
     // private void Update() {
@@ -92,4 +99,19 @@ public class Enemy : MonoBehaviour
         audioSource.clip = rifleShooting;
         audioSource.Play();
     }
+
+    void OnAnimatorIK() {
+        if (ikActive && enemyFieldOfView.visibleTargets.Count != 0) {
+            if (isHeadWatch) {
+                animator.SetLookAtWeight(1);
+                animator.SetLookAtPosition(enemyFieldOfView.visibleTargets[0].position);
+            }
+        }
+        // if (ikActive) {
+        //     if (isHeadWatch) {
+        //         animator.SetLookAtWeight(1);
+        //         animator.SetLookAtPosition(lookAim.position);
+        //     }
+        // }
+	}
 }

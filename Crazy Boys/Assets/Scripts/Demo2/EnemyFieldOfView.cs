@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 [RequireComponent(typeof(Enemy))]
 public class EnemyFieldOfView : MonoBehaviour {
-
+	public Transform viewPoint;
 	public float viewRadius;
 	[Range(0,360)]
 	public float viewAngle;
@@ -25,7 +25,6 @@ public class EnemyFieldOfView : MonoBehaviour {
 		StartCoroutine ("FindTargetsWithDelay", responseTime);
 	}
 
-
 	IEnumerator FindTargetsWithDelay(float delay) {
 		while (true) {
 			yield return new WaitForSeconds (delay);
@@ -35,26 +34,32 @@ public class EnemyFieldOfView : MonoBehaviour {
 
 	void FindVisibleTargets() {
 		visibleTargets.Clear ();
-		Collider[] targetsInViewRadius = Physics.OverlapSphere (transform.position, viewRadius, targetMask);
+		Collider[] targetsInViewRadius = Physics.OverlapSphere (viewPoint.position, viewRadius, targetMask);
+		bool isGetTarget = false;
 
 		for (int i = 0; i < targetsInViewRadius.Length; i++) {
 			Transform target = targetsInViewRadius [i].transform;
-			Vector3 dirToTarget = (target.position - transform.position).normalized;
-			if (Vector3.Angle (transform.forward, dirToTarget) < viewAngle / 2) {
-				float dstToTarget = Vector3.Distance (transform.position, target.position);
+			Vector3 dirToTarget = (target.position - viewPoint.position).normalized;
+			if (Vector3.Angle (viewPoint.forward, dirToTarget) < viewAngle / 2) {
+				float dstToTarget = Vector3.Distance (viewPoint.position, target.position);
 
-				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
+				if (!Physics.Raycast (viewPoint.position, dirToTarget, dstToTarget, obstacleMask)) {
 					visibleTargets.Add (target);
-					enemy.setIsShooting(true);
+					isGetTarget = true;
 				}
 			}
 		}
-	}
 
+		if (isGetTarget && enemy.autoAttack) {
+			enemy.setIsShooting(true);
+		} else {
+			enemy.setIsShooting(false);
+		}
+	}
 
 	public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal) {
 		if (!angleIsGlobal) {
-			angleInDegrees += transform.eulerAngles.y;
+			angleInDegrees += viewPoint.eulerAngles.y;
 		}
 		return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad),0,Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
 	}
