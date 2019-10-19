@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform lookAtCharacter;
-    public float smoothSpeed = 0.125f;
-    private Vector3 posOffset;
-    void Start() {
-        posOffset = this.transform.position - lookAtCharacter.position;
+    public Transform target;
+    public float smothing = 10f;
+    private Vector3 offset;
+    // Use this for initialization
+    void Start () {
+        offset = transform.position - target.position;
     }
-    void LateUpdate()
-    {
-        this.transform.LookAt(lookAtCharacter);
-        // Vector3 originPos = this.transform.position;
-        // Vector3 characterPos = lookAtCharacter.position;
-        // this.transform.Translate(new Vector3(characterPos.x - originPos.x, 0, 0));
-        Vector3 desiredPos = lookAtCharacter.position + posOffset;
-        Vector3 smoothedPos = Vector3.Lerp(this.transform.position, desiredPos, smoothSpeed);
-        this.transform.position = smoothedPos;
+    // Update is called once per frame
+    void LateUpdate () {
+        Vector3 targetCampos = target.position + offset;
+        transform.position = Vector3.Lerp(transform.position, targetCampos, smothing * Time.deltaTime);
     }
+
 }

@@ -41,7 +41,6 @@ public class PlayerIKController : MonoBehaviour
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
                 animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandAim.position);
                 animator.SetIKRotationWeight(AvatarIKGoal.LeftHand,leftHandRotationWeight);
-                animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftHandRotationWeight);
                 animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandAim.rotation);
             } else {
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftHand,0);
