@@ -1285,7 +1285,7 @@ PrefabInstance:
     - target: {fileID: 662760208707417047, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
@@ -1371,6 +1371,11 @@ PrefabInstance:
       propertyPath: viewPoint
       value: 
       objectReference: {fileID: 834735902}
+    - target: {fileID: 4596650034846446368, guid: b7a3dc871eda27742bd7203e20e2ccb1,
+        type: 3}
+      propertyPath: viewAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4596650034846446373, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
       propertyPath: bulletSpeed
@@ -1386,6 +1391,16 @@ PrefabInstance:
       propertyPath: lookAim
       value: 
       objectReference: {fileID: 1322570108}
+    - target: {fileID: 4596650034846446373, guid: b7a3dc871eda27742bd7203e20e2ccb1,
+        type: 3}
+      propertyPath: attackRestTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596650034846446373, guid: b7a3dc871eda27742bd7203e20e2ccb1,
+        type: 3}
+      propertyPath: attackTimesThreshold
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7a3dc871eda27742bd7203e20e2ccb1, type: 3}
 --- !u!1001 &8231119947700875432

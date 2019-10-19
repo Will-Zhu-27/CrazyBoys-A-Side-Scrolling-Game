@@ -26,7 +26,12 @@ public class Enemy : MonoBehaviour
     private EnemyFieldOfView enemyFieldOfView;
     public Transform lookAim;
     public bool autoAttack = true;
+    
+    public int attackTimesThreshold = 5;
+    [SerializeField] private float attackRestTime = 2f;
+    private int currentAttackTimes = 0;
 
+    [HideInInspector] public bool isUnderRest = false;
     private void Start() {
         currentHp = maxHp;
         animator = this.GetComponent<Animator>();
@@ -36,25 +41,19 @@ public class Enemy : MonoBehaviour
         enemyFieldOfView = this.GetComponent<EnemyFieldOfView>();
     }
 
-    // private void Update() {
-    //     if (Input.GetKeyDown(KeyCode.G)) {
-    //         isShooting = true;
-    //     } else if (Input.GetKeyUp(KeyCode.G)) {
-    //         isShooting = false;
-    //     }
-    //     animator.SetBool(isShootingId, isShooting);
-    // }
-
     public void setIsShooting(bool isShooting) {
-        this.isShooting = isShooting;
-        animator.SetBool(isShootingId, isShooting);
+        if (this.isUnderRest) {
+            this.isShooting = false;
+        } else {
+            this.isShooting = isShooting;
+        }
+        animator.SetBool(isShootingId, this.isShooting);
     }
 
     public void TakeDamage(int damage) {
         currentHp -= damage;
         print("current hp: " + currentHp);
         if (currentHp <= 0) {
-            // animator.Play("Falling Back Death");
             Die();
         }
     }
@@ -91,6 +90,7 @@ public class Enemy : MonoBehaviour
     /// “Gunplay” Clip Event
     /// </summary> 
     private void ShootingEvent() {
+        currentAttackTimes++;
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
         bullet.transform.Rotate(bulletRotationOffset);
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
@@ -98,6 +98,10 @@ public class Enemy : MonoBehaviour
 
         audioSource.clip = rifleShooting;
         audioSource.Play();
+        
+        if (currentAttackTimes >= attackTimesThreshold) {
+            StartCoroutine("Rest", this.attackRestTime);
+        }
     }
 
     void OnAnimatorIK() {
@@ -107,11 +111,13 @@ public class Enemy : MonoBehaviour
                 animator.SetLookAtPosition(enemyFieldOfView.visibleTargets[0].position);
             }
         }
-        // if (ikActive) {
-        //     if (isHeadWatch) {
-        //         animator.SetLookAtWeight(1);
-        //         animator.SetLookAtPosition(lookAim.position);
-        //     }
-        // }
 	}
+
+    IEnumerator Rest(float restTime) {
+        this.setIsShooting(false);
+        this.isUnderRest = true;
+        yield return new WaitForSeconds(restTime);
+        this.isUnderRest = false;
+        this.currentAttackTimes = 0;
+    }
 }
