@@ -1299,6 +1299,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: quickRollKeyCode
+      value: 326
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: isAutoTrunAround
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928652, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
 --- !u!1001 &4768967255361361478
@@ -1421,7 +1436,7 @@ PrefabInstance:
     - target: {fileID: 4596650034846446368, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
       propertyPath: viewRadius
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4596650034846446368, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
@@ -1506,6 +1521,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bullet Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 822464885581918048, guid: 8f0e8bc8900e543a7a01f811b850edd5,
         type: 3}

@@ -21,6 +21,7 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] private KeyCode crouchKeyCode = KeyCode.S;
     [SerializeField] private KeyCode runKeyCode = KeyCode.LeftShift;
     [SerializeField] private KeyCode shootingKeyCode = KeyCode.Mouse0;
+    [SerializeField] private KeyCode quickRollKeyCode = KeyCode.Mouse3;
     [SerializeField] private Transform trackObj;
     [SerializeField] private float trunAroundThreshold = -0.1f;
     [SerializeField] private float turnAroundTime = 0.3f;
@@ -47,6 +48,9 @@ public class PlayerMoveController : MonoBehaviour
     private Quaternion startRotation;
     private Quaternion endRotation;
     private Vector3 targetDirection;
+    private bool isRoll;
+    private int isRollId;
+    [SerializeField] private bool isAutoTrunAround = true;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +64,7 @@ public class PlayerMoveController : MonoBehaviour
         forwardMoveId = Animator.StringToHash("forwardMove");
         isCrouchId = Animator.StringToHash("isCrouch");
         isRunId = Animator.StringToHash("isRun");
+        isRollId = Animator.StringToHash("isRoll");
     }
 
     // Update is called once per frame
@@ -133,9 +138,21 @@ public class PlayerMoveController : MonoBehaviour
         } else if (Input.GetKeyUp(shootingKeyCode)) {
             isShooting = false;
         }
+
+        // quick roll
+        if (Input.GetKeyDown(quickRollKeyCode)) {
+            print("quick roll");
+            isRoll = true;
+        } else if (Input.GetKeyUp(quickRollKeyCode)) {
+            isRoll = false;
+        }
+        animator.SetBool(isRollId, isRoll);
     }
 
     private void AutoTurnAround() {
+        if (!isAutoTrunAround) {
+            return;
+        }
         if (!isTurningAround && this.transform.InverseTransformPoint(trackObj.position).z < trunAroundThreshold) {
             isTurningAround = true;
             startRotateTime = Time.time;
