@@ -11,7 +11,7 @@ public class Melee : MonoBehaviour
     {
         if (col.tag == "Enemy") {
             col.GetComponent<Enemy>().TakeDamage(meleeDamage);
-            print("kick enemy!");
+            // print("kick enemy!");
         }
     }
 }

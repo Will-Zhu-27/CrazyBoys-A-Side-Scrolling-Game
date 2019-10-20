@@ -384,7 +384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &662760208707417046
 Transform:
   m_ObjectHideFlags: 0
@@ -3917,8 +3917,6 @@ GameObject:
   - component: {fileID: 940471773}
   - component: {fileID: 940471781}
   - component: {fileID: 940471774}
-  - component: {fileID: 6626136228422232121}
-  - component: {fileID: 6689692926286660308}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -4013,6 +4011,7 @@ MonoBehaviour:
   crouchKeyCode: 115
   runKeyCode: 304
   shootingKeyCode: 323
+  quickRollKeyCode: 326
   trackObj: {fileID: 662760207348135975}
   trunAroundThreshold: -0.1
   turnAroundTime: 0.3
@@ -4022,6 +4021,7 @@ MonoBehaviour:
   crouchingColliderCenter: {x: 0, y: 0.52, z: 0}
   crouchHitBoxCenter: {x: 0, y: 0.65, z: 0}
   crouchHitBoxSize: {x: -0.99, y: 0.9, z: 0.34}
+  isAutoTrunAround: 1
 --- !u!114 &1074792657440928652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4184,7 +4184,7 @@ MonoBehaviour:
   handgunShoot: {fileID: 8300000, guid: be64544bade297e4d872dd74c66256d2, type: 3}
   reloadingKeyCode: 114
   handgunReload: {fileID: 8300000, guid: e1d79f4a0c7873742babc5f6e9ff800e, type: 3}
-  bulletSpeed: 15
+  bulletSpeed: 10
   bulletRotationOffset: {x: 90, y: 0, z: 0}
 --- !u!65 &940471781
 BoxCollider:
@@ -4211,35 +4211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c529e4a547c1344995c17f677ec1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 10000
   currentHP: 0
---- !u!65 &6626136228422232121
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1074792657440928640}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.77, z: 0.24}
-  m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &6689692926286660308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1074792657440928640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6c529e4a547c1344995c17f677ec1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  currentHP: 0
+  isVincible: 0
 --- !u!1 &1074792657440929878
 GameObject:
   m_ObjectHideFlags: 0

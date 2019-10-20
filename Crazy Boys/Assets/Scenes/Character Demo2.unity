@@ -1286,33 +1286,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 940471773, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
-      propertyPath: bulletSpeed
-      value: 10
+    - target: {fileID: 69352537, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
+      propertyPath: m_Size.x
+      value: 74.83264
       objectReference: {fileID: 0}
-    - target: {fileID: 940471774, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
-      propertyPath: maxHP
-      value: 10000
+    - target: {fileID: 69352537, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
+      propertyPath: m_Center.x
+      value: -36.916313
       objectReference: {fileID: 0}
-    - target: {fileID: 662760208707417047, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 69352537, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
+      propertyPath: m_Center.y
+      value: -0.65199965
       objectReference: {fileID: 0}
-    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
-        type: 3}
-      propertyPath: quickRollKeyCode
-      value: 326
-      objectReference: {fileID: 0}
-    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
-        type: 3}
-      propertyPath: isAutoTrunAround
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1074792657440928652, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
+    - target: {fileID: 69352537, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
+      propertyPath: m_Center.z
+      value: 0.6085952
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
@@ -1381,12 +1369,12 @@ PrefabInstance:
     - target: {fileID: 4596650034845993896, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.283
+      value: 3.491
       objectReference: {fileID: 0}
     - target: {fileID: 4596650034845993896, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.954
+      value: 0.021
       objectReference: {fileID: 0}
     - target: {fileID: 4596650034845993896, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
@@ -1501,7 +1489,7 @@ PrefabInstance:
     - target: {fileID: 4596650034846446373, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
       propertyPath: maxHp
-      value: 10000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4596650034846446373, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}

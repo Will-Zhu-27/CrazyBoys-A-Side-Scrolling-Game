@@ -53,12 +53,13 @@ public class Enemy : MonoBehaviour
         animator.SetBool(isShootingId, this.isShooting);
     }
 
-    public void TakeDamage(int damage) {
+    public bool TakeDamage(int damage) {
         currentHp -= damage;
         print("current hp: " + currentHp);
         if (currentHp <= 0) {
             Die();
         }
+        return true;
     }
 
     private void Die() {

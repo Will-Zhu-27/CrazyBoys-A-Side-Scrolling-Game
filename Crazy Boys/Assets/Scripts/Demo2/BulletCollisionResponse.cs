@@ -8,13 +8,16 @@ public class BulletCollisionResponse : MonoBehaviour
     private void OnTriggerEnter(Collider col)
     {
         if (col.tag == "Enemy") {
-            col.GetComponent<Enemy>().TakeDamage(damage);
-            print("hit damage!");
-        } else if (col.tag == "Player") {
-            col.GetComponent<PlayerStatus>().TakeDamage(damage);
+            if (col.GetComponent<Enemy>().TakeDamage(damage)) {
+               Destroy(this.gameObject); 
+            }
+            
         }
 
-        // Debug.Log("hit!");
-        Destroy(this.gameObject);
+        if (col.tag == "Player") {
+            if (col.GetComponent<PlayerStatus>().TakeDamage(damage)) {
+                Destroy(this.gameObject); 
+            }
+        }
     }
 }
