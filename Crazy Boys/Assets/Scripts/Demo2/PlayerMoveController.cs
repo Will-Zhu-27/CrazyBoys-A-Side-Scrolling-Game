@@ -51,6 +51,11 @@ public class PlayerMoveController : MonoBehaviour
     private bool isRoll;
     private int isRollId;
     [SerializeField] private bool isAutoTrunAround = true;
+    [SerializeField] private KeyCode jumpKeyCode = KeyCode.Space;
+    [SerializeField] private bool isJump = false;
+    private int isJumpId;
+    [SerializeField] private AnimationCurve jumpFallOff;
+    [SerializeField] private float jumpMultiplier;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +70,7 @@ public class PlayerMoveController : MonoBehaviour
         isCrouchId = Animator.StringToHash("isCrouch");
         isRunId = Animator.StringToHash("isRun");
         isRollId = Animator.StringToHash("isRoll");
+        isJumpId = Animator.StringToHash("isJump");
     }
 
     // Update is called once per frame
@@ -86,6 +92,9 @@ public class PlayerMoveController : MonoBehaviour
         if (isTurningAround) {
             return;
         }
+        // if (isJump) {
+        //     return;
+        // }
         float forwardMovement = 0f;
         if (forwardMoveInput > 0.05f) {
             if (isRun && !isCrouch) {
@@ -147,6 +156,13 @@ public class PlayerMoveController : MonoBehaviour
             isRoll = false;
         }
         animator.SetBool(isRollId, isRoll);
+
+        // jump
+        if (!this.isJump && !this.isCrouch && Input.GetKey(jumpKeyCode)) {
+            this.isJump = true;     
+            StartCoroutine(JumpEvent());
+        }
+        animator.SetBool(isJumpId, isJump);
     }
 
     private void AutoTurnAround() {
@@ -196,5 +212,27 @@ public class PlayerMoveController : MonoBehaviour
             this.hitBox.center = this.standHitBoxCenter;
             this.hitBox.size = this.standHitBoxSize;
         }
+    }
+
+    private IEnumerator JumpEvent() {
+        characterController.slopeLimit = 90.0f;
+        float timeInAir = 0.0f;
+
+        do
+        {
+            float jumpForce = jumpFallOff.Evaluate(timeInAir);
+            // if (this.isFaceForward) {
+            //     characterController.Move((Vector3.up + Vector3.right).normalized * jumpForce * jumpMultiplier * Time.deltaTime);
+            // } else {
+            //     characterController.Move((Vector3.up + Vector3.left).normalized * jumpForce * jumpMultiplier * Time.deltaTime);
+            // }
+            characterController.Move((Vector3.up).normalized * jumpForce * jumpMultiplier * Time.deltaTime);
+            
+            timeInAir += Time.deltaTime;
+            yield return null;
+        } while (!characterController.isGrounded && characterController.collisionFlags != CollisionFlags.Above);
+
+        characterController.slopeLimit = 45.0f;
+        isJump = false;
     }
 }

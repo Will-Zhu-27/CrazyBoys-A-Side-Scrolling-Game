@@ -632,7 +632,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132242804}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1286,6 +1286,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpFallOff.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpFallOff.m_Curve.Array.data[0].value
+      value: 1.0023499
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpFallOff.m_Curve.Array.data[0].inSlope
+      value: 0.2339501
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpFallOff.m_Curve.Array.data[0].outSlope
+      value: 0.2339501
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpFallOff.m_Curve.Array.data[0].outWeight
+      value: 0.15958191
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpFallOff.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpFallOff.m_Curve.Array.data[1].value
+      value: -0.0000076293945
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpFallOff.m_Curve.Array.data[1].inSlope
+      value: 0.1485195
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpFallOff.m_Curve.Array.data[1].outSlope
+      value: 0.1485195
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpFallOff.m_Curve.Array.data[1].inWeight
+      value: 0.17373574
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpMultiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: isJump
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 69352537, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
       propertyPath: m_Size.x
       value: 74.83264
@@ -1319,7 +1379,7 @@ PrefabInstance:
     - target: {fileID: 4596650034846446372, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4596650034846014912, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
@@ -1489,7 +1549,7 @@ PrefabInstance:
     - target: {fileID: 4596650034846446373, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
       propertyPath: maxHp
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4596650034846446373, guid: b7a3dc871eda27742bd7203e20e2ccb1,
         type: 3}
