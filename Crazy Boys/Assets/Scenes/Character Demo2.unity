@@ -246,6 +246,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73fd09c03ac478646b1ce53fe6cc9cde, type: 3}
+--- !u!1 &62670745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1074792657440928640, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 662760207304006549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &62670746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62670745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb40b5a016da3a246abd479224429a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInfiniteBullets: 0
+  ownBullets: 32
+  maxClipCapacity: 16
+  currentClipCapacity: 0
+  bulletPrefab: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
+    type: 3}
+  bulletRotationOffset: {x: 90, y: 0, z: 0}
+  bulletSpeed: 10
+  handgunShoot: {fileID: 8300000, guid: be64544bade297e4d872dd74c66256d2, type: 3}
+  handgunReload: {fileID: 8300000, guid: e1d79f4a0c7873742babc5f6e9ff800e, type: 3}
+  gunEmpty: {fileID: 8300000, guid: 09f9910ffba60da45abff42dfac5f692, type: 3}
 --- !u!4 &75336024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 413034, guid: 73fd09c03ac478646b1ce53fe6cc9cde,
