@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 46.01494, y: 20.098375, z: 7.79783}
-  m_Center: {x: -22.50747, y: -0.6519909, z: 0.6085962}
+  m_Size: {x: 74.83264, y: 20.098375, z: 7.79783}
+  m_Center: {x: -36.916313, y: -0.65199965, z: 0.6085952}
 --- !u!114 &69352539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4022,6 +4022,33 @@ MonoBehaviour:
   crouchHitBoxCenter: {x: 0, y: 0.65, z: 0}
   crouchHitBoxSize: {x: -0.99, y: 0.9, z: 0.34}
   isAutoTrunAround: 1
+  jumpKeyCode: 32
+  isJump: 0
+  jumpFallOff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0023499
+      inSlope: 0.2339501
+      outSlope: 0.2339501
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.15958191
+    - serializedVersion: 3
+      time: 1
+      value: -0.0000076293945
+      inSlope: 0.1485195
+      outSlope: 0.1485195
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17373574
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpMultiplier: 10
 --- !u!114 &1074792657440928652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4029,7 +4056,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074792657440928640}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e494b9797fc6a4e08a18c8de5bb2cf7d, type: 3}
   m_Name: 

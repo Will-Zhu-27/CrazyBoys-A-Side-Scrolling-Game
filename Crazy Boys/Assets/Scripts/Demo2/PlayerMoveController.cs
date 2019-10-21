@@ -12,11 +12,11 @@ using UnityEngine;
 public class PlayerMoveController : MonoBehaviour
 {
     [SerializeField] private bool isFaceForward = true;
-    [SerializeField] private float forwardWalkSpeed = 2f;
-    [SerializeField] private float backwardWalkSpeed = 1f;
-    [SerializeField] private float crouchingForwardWalkSpeed = 1.5f;
-    [SerializeField] private float crouchingBackwardWalkSpeed = 0.75f;
-    [SerializeField] private float runSpeed = 4f;
+    [SerializeField] private float forwardSpeed = 2f;
+    [SerializeField] private float backwardSpeed = 1f;
+    [SerializeField] private float crouchingForwardSpeed = 1.5f;
+    [SerializeField] private float crouchingBackwardSpeed = 0.75f;
+    // [SerializeField] private float runSpeed = 4f;
     [SerializeField] private string forwardMoveInputName = "Horizontal";
     [SerializeField] private KeyCode crouchKeyCode = KeyCode.S;
     [SerializeField] private KeyCode runKeyCode = KeyCode.LeftShift;
@@ -54,8 +54,9 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] private KeyCode jumpKeyCode = KeyCode.Space;
     [SerializeField] private bool isJump = false;
     private int isJumpId;
-    [SerializeField] private AnimationCurve jumpFallOff;
-    [SerializeField] private float jumpMultiplier;
+    [SerializeField] private float jumpSpeed = 8.0f;
+    private Vector3 move = Vector3.zero;
+    [SerializeField] private float gravity = 20.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -79,42 +80,92 @@ public class PlayerMoveController : MonoBehaviour
         HandleUserInput();
         AutoTurnAround();
         CharacterMove();
-        // if (!characterController.isGrounded) {
-        //     Debug.Log("play is not at ground!");
-        // }
     }
-
+    
     private void CharacterMove() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Kick")) {
-            animator.SetBool(isCrouchId, false);
-            return;
-        }
-        if (isTurningAround) {
-            return;
-        }
-        // if (isJump) {
-        //     return;
-        // }
-        float forwardMovement = 0f;
-        if (forwardMoveInput > 0.05f) {
-            if (isRun && !isCrouch) {
-                forwardMovement = forwardMoveInput * runSpeed;
-            } else if (!isCrouch){
-                forwardMovement = forwardMoveInput * forwardWalkSpeed;
+        if (characterController.isGrounded)
+        {
+            // We are grounded, so recalculate
+            // move direction directly from axes
+            float xInput = Input.GetAxis("Horizontal");
+            move = new Vector3(xInput, 0.0f, 0.0f);
+            if (isFaceForward) {
+                if (xInput > 0.05)
+                {
+                    move *= forwardSpeed;
+                }
+                else if (xInput < -0.05)
+                {
+                    move *= backwardSpeed;
+                }
+                else
+                {
+                    move = Vector3.zero;
+                }
             } else {
-                forwardMovement = forwardMoveInput * crouchingForwardWalkSpeed;
-            }
-        } else if (forwardMoveInput < -0.05f) {
-            if (!isCrouch) {
-                forwardMovement = forwardMoveInput * backwardWalkSpeed;
-            } else {
-                forwardMovement = forwardMoveInput * crouchingBackwardWalkSpeed;
+                if (xInput > 0.05)
+                {
+                    move *= backwardSpeed;
+                }
+                else if (xInput < -0.05)
+                {
+                    move *= forwardSpeed;
+                }
+                else
+                {
+                    move = Vector3.zero;
+                }
             }
             
+
+            
+
+            if (Input.GetButton("Jump"))
+            {
+                move.y = jumpSpeed;
+            }
         }
-        Vector3 forwardVect = transform.TransformDirection(Vector3.forward).normalized * forwardMovement;
-        characterController.SimpleMove(forwardVect);
+
+        // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
+        // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
+        // as an acceleration (ms^-2)
+        move.y -= gravity * Time.deltaTime;
+
+        // Move the controller
+        characterController.Move(move * Time.deltaTime);
     }
+
+    // private void CharacterMove() {
+    //     if (animator.GetCurrentAnimatorStateInfo(0).IsName("Kick")) {
+    //         animator.SetBool(isCrouchId, false);
+    //         return;
+    //     }
+    //     if (isTurningAround) {
+    //         return;
+    //     }
+    //     // if (isJump) {
+    //     //     return;
+    //     // }
+    //     float forwardMovement = 0f;
+    //     if (forwardMoveInput > 0.05f) {
+    //         if (isRun && !isCrouch) {
+    //             forwardMovement = forwardMoveInput * runSpeed;
+    //         } else if (!isCrouch){
+    //             forwardMovement = forwardMoveInput * forwardWalkSpeed;
+    //         } else {
+    //             forwardMovement = forwardMoveInput * crouchingForwardWalkSpeed;
+    //         }
+    //     } else if (forwardMoveInput < -0.05f) {
+    //         if (!isCrouch) {
+    //             forwardMovement = forwardMoveInput * backwardWalkSpeed;
+    //         } else {
+    //             forwardMovement = forwardMoveInput * crouchingBackwardWalkSpeed;
+    //         }
+            
+    //     }
+    //     Vector3 forwardVect = transform.TransformDirection(Vector3.forward).normalized * forwardMovement;
+    //     characterController.SimpleMove(forwardVect);
+    // }
 
     private void HandleUserInput() {
         forwardMoveInput = Input.GetAxis(forwardMoveInputName);
@@ -160,26 +211,25 @@ public class PlayerMoveController : MonoBehaviour
         // jump
         if (!this.isJump && !this.isCrouch && Input.GetKey(jumpKeyCode) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) {
             this.isJump = true;
-            StartCoroutine(JumpEvent());
         }
         animator.SetBool(isJumpId, isJump);
     }
 
     private void AutoTurnAround() {
-        if (!isAutoTrunAround || this.isJump) {
+        if (!isAutoTrunAround) {
             return;
         }
         if (!isTurningAround && this.transform.InverseTransformPoint(trackObj.position).z < trunAroundThreshold) {
-            isTurningAround = true;
-            startRotateTime = Time.time;
-        }
-        if (isTurningAround) {
-            TurnAround();
+            print("turn around event start");
+            StartCoroutine(TurnAroundEvent());
         }
     }
 
-    private void TurnAround()
-    {
+    IEnumerator TurnAroundEvent() {
+        
+        isTurningAround = true;
+        startRotateTime = Time.time;
+        float l;
         if (isFaceForward)
         {
             startRotation = Quaternion.Euler(0, 90f, 0);
@@ -192,12 +242,14 @@ public class PlayerMoveController : MonoBehaviour
             endRotation = Quaternion.Euler(0, 90f, 0);
             targetDirection = new Vector3(0, 90f, 0);
         }
-        float l = Mathf.InverseLerp(startRotateTime, startRotateTime + turnAroundTime, Time.time);
-        transform.rotation = Quaternion.Lerp(startRotation, endRotation, l);
-        if (this.transform.rotation.eulerAngles.Equals(targetDirection)) {
-            isTurningAround = false;
-            isFaceForward = !isFaceForward;
-        }
+        do {
+            l = Mathf.InverseLerp(startRotateTime, startRotateTime + turnAroundTime, Time.time);
+            transform.rotation = Quaternion.Lerp(startRotation, endRotation, l);
+            yield return null;
+        } while(transform.rotation !=  endRotation);
+        isTurningAround = false;
+        isFaceForward = !isFaceForward;
+        print("turn around event end");
     }
 
     private void CroushOnCollider(bool isCrouch) {
@@ -214,25 +266,4 @@ public class PlayerMoveController : MonoBehaviour
         }
     }
 
-    private IEnumerator JumpEvent() {
-        characterController.slopeLimit = 90.0f;
-        float timeInAir = 0.0f;
-
-        do
-        {
-            float jumpForce = jumpFallOff.Evaluate(timeInAir);
-            // if (this.isFaceForward) {
-            //     characterController.Move((Vector3.up + Vector3.right).normalized * jumpForce * jumpMultiplier * Time.deltaTime);
-            // } else {
-            //     characterController.Move((Vector3.up + Vector3.left).normalized * jumpForce * jumpMultiplier * Time.deltaTime);
-            // }
-            characterController.Move((Vector3.up).normalized * jumpForce * jumpMultiplier * Time.deltaTime);
-            
-            timeInAir += Time.deltaTime;
-            yield return null;
-        } while (!characterController.isGrounded && characterController.collisionFlags != CollisionFlags.Above);
-
-        characterController.slopeLimit = 45.0f;
-        isJump = false;
-    }
 }
