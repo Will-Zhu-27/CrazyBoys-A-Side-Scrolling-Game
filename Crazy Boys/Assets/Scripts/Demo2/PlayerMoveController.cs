@@ -158,15 +158,15 @@ public class PlayerMoveController : MonoBehaviour
         animator.SetBool(isRollId, isRoll);
 
         // jump
-        if (!this.isJump && !this.isCrouch && Input.GetKey(jumpKeyCode)) {
-            this.isJump = true;     
+        if (!this.isJump && !this.isCrouch && Input.GetKey(jumpKeyCode) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) {
+            this.isJump = true;
             StartCoroutine(JumpEvent());
         }
         animator.SetBool(isJumpId, isJump);
     }
 
     private void AutoTurnAround() {
-        if (!isAutoTrunAround) {
+        if (!isAutoTrunAround || this.isJump) {
             return;
         }
         if (!isTurningAround && this.transform.InverseTransformPoint(trackObj.position).z < trunAroundThreshold) {
