@@ -691,7 +691,7 @@ Transform:
   m_GameObject: {fileID: 1132242804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.21, y: 0.496, z: -0.21}
-  m_LocalScale: {x: 6.4584, y: 2.9108496, z: 9.569419}
+  m_LocalScale: {x: 6.4584, y: 1.4744618, z: 9.569419}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -1289,7 +1289,37 @@ PrefabInstance:
     - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
         type: 3}
       propertyPath: backwardSpeed
-      value: 0.8
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: forwardSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: isJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: gravity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: crouchingForwardSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: crouchingBackwardSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074792657440928643, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
+        type: 3}
+      propertyPath: jumpSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1074792657440928652, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
         type: 3}

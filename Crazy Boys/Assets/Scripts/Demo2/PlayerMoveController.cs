@@ -83,44 +83,69 @@ public class PlayerMoveController : MonoBehaviour
     }
     
     private void CharacterMove() {
-        if (characterController.isGrounded)
-        {
+        if (characterController.isGrounded) {
             // We are grounded, so recalculate
             // move direction directly from axes
-            float xInput = Input.GetAxis("Horizontal");
-            move = new Vector3(xInput, 0.0f, 0.0f);
-            if (isFaceForward) {
-                if (xInput > 0.05)
+            AnimatorStateInfo animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (animatorStateInfo.IsName("Kick"))
+            {
+                // when player is kicking, stop move
+                animator.SetBool(isCrouchId, false);
+                move = Vector3.zero;
+            }
+            else
+            {
+                float xInput = Input.GetAxis("Horizontal");
+                move = new Vector3(xInput, 0.0f, 0.0f);
+                if (isFaceForward)
                 {
-                    move *= forwardSpeed;
-                }
-                else if (xInput < -0.05)
-                {
-                    move *= backwardSpeed;
+                    if (xInput > 0.05)
+                    {
+                        if (isCrouch) {
+                            move *= crouchingForwardSpeed;
+                        } else {
+                            move *= forwardSpeed;
+                        }
+                    }
+                    else if (xInput < -0.05)
+                    {
+                        if (isCrouch) {
+                            move *= crouchingBackwardSpeed;
+                        } else {
+                            move *= backwardSpeed;
+                        }
+                    }
+                    else
+                    {
+                        move = Vector3.zero;
+                    }
                 }
                 else
                 {
-                    move = Vector3.zero;
-                }
-            } else {
-                if (xInput > 0.05)
-                {
-                    move *= backwardSpeed;
-                }
-                else if (xInput < -0.05)
-                {
-                    move *= forwardSpeed;
-                }
-                else
-                {
-                    move = Vector3.zero;
+                    if (xInput > 0.05)
+                    {
+                        if (isCrouch) {
+                            move *= crouchingBackwardSpeed;
+                        } else {
+                            move *= backwardSpeed;
+                        }
+                    }
+                    else if (xInput < -0.05)
+                    {
+                        if (isCrouch) {
+                            move *= crouchingForwardSpeed;
+                        } else {
+                            move *= forwardSpeed;
+                        }
+                    }
+                    else
+                    {
+                        move = Vector3.zero;
+                    }
                 }
             }
             
-
-            
-
-            if (Input.GetButton("Jump"))
+            if (!animatorStateInfo.IsName("Quick Roll") && Input.GetKeyDown(jumpKeyCode))
             {
                 move.y = jumpSpeed;
             }
@@ -134,38 +159,6 @@ public class PlayerMoveController : MonoBehaviour
         // Move the controller
         characterController.Move(move * Time.deltaTime);
     }
-
-    // private void CharacterMove() {
-    //     if (animator.GetCurrentAnimatorStateInfo(0).IsName("Kick")) {
-    //         animator.SetBool(isCrouchId, false);
-    //         return;
-    //     }
-    //     if (isTurningAround) {
-    //         return;
-    //     }
-    //     // if (isJump) {
-    //     //     return;
-    //     // }
-    //     float forwardMovement = 0f;
-    //     if (forwardMoveInput > 0.05f) {
-    //         if (isRun && !isCrouch) {
-    //             forwardMovement = forwardMoveInput * runSpeed;
-    //         } else if (!isCrouch){
-    //             forwardMovement = forwardMoveInput * forwardWalkSpeed;
-    //         } else {
-    //             forwardMovement = forwardMoveInput * crouchingForwardWalkSpeed;
-    //         }
-    //     } else if (forwardMoveInput < -0.05f) {
-    //         if (!isCrouch) {
-    //             forwardMovement = forwardMoveInput * backwardWalkSpeed;
-    //         } else {
-    //             forwardMovement = forwardMoveInput * crouchingBackwardWalkSpeed;
-    //         }
-            
-    //     }
-    //     Vector3 forwardVect = transform.TransformDirection(Vector3.forward).normalized * forwardMovement;
-    //     characterController.SimpleMove(forwardVect);
-    // }
 
     private void HandleUserInput() {
         forwardMoveInput = Input.GetAxis(forwardMoveInputName);
@@ -209,10 +202,18 @@ public class PlayerMoveController : MonoBehaviour
         animator.SetBool(isRollId, isRoll);
 
         // jump
-        if (!this.isJump && !this.isCrouch && Input.GetKey(jumpKeyCode) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) {
-            this.isJump = true;
+        if (!this.isJump && !this.isCrouch && Input.GetKey(jumpKeyCode) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling")) {
+            StartCoroutine(JumpEvent());
         }
         animator.SetBool(isJumpId, isJump);
+    }
+
+    IEnumerator JumpEvent() {
+        this.isJump = true;
+        while(!characterController.isGrounded) {
+            yield return null;
+        }
+        this.isJump = false;
     }
 
     private void AutoTurnAround() {
