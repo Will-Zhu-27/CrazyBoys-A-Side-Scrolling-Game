@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerUIManage))]
 [RequireComponent(typeof(AudioSource))]
 public class WeaponManage : MonoBehaviour
 {
     public bool isInfiniteBullets;
     public int ownBullets = 0;
     public int maxClipCapacity = 16;
-    [SerializeField] private int currentClipCapacity;
-
+    public int currentClipCapacity;
     public GameObject bulletPrefab;
     public Vector3 bulletRotationOffset;
     [SerializeField] private float bulletSpeed = 10f;
@@ -17,10 +17,14 @@ public class WeaponManage : MonoBehaviour
     public AudioClip handgunShoot;
     public AudioClip handgunReload;
     public AudioClip gunEmpty;
+    private PlayerUIManage playerUIManage;
 
-    private void Start() {
+    private void Awake() {
         currentClipCapacity = maxClipCapacity;
+    }
+    private void Start() {
         audioSource = this.GetComponent<AudioSource>();
+        playerUIManage = GetComponent<PlayerUIManage>();
     }
 
     public bool Fire(Vector3 direction, Vector3 startPosition, Quaternion startRotation) {
@@ -37,6 +41,7 @@ public class WeaponManage : MonoBehaviour
             bulletRigidbody.AddForce(direction * bulletSpeed, ForceMode.Impulse);
             audioSource.clip = handgunShoot;
             audioSource.Play();
+            playerUIManage.updateBulletText();
             return true;
         }
     }
@@ -66,10 +71,12 @@ public class WeaponManage : MonoBehaviour
                 ownBullets = 0;
             }
         }
+        playerUIManage.updateBulletText();
         return true;
     }
 
     public void GetBullet(int addBullets) {
         ownBullets += addBullets;
+        playerUIManage.updateBulletText();
     }
 }

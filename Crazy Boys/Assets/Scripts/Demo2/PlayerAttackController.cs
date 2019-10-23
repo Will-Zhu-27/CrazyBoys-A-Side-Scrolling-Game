@@ -37,8 +37,6 @@ public class PlayerAttackController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(shootingKeyCode)) {
-            // audioSource.clip = handgunShoot;
-            // audioSource.Play();
             Transform start = null;
             if (isRightShooting) {
                 start = rightBulletSpawn;
@@ -51,7 +49,7 @@ public class PlayerAttackController : MonoBehaviour
         if (Input.GetKeyDown(reloadingKeyCode)) {
             weaponManage.Reloading();
         }
-        if (Input.GetKeyDown(meleeAttackKeyCode)) {
+        if (Input.GetKeyDown(meleeAttackKeyCode) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Quick Roll")) {
             isKick = true;
         } else if (Input.GetKeyUp(meleeAttackKeyCode)) {
             isKick = false;
