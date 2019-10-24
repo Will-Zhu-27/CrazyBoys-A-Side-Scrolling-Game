@@ -19,7 +19,6 @@ public class PlayerMoveController : MonoBehaviour
     // [SerializeField] private float runSpeed = 4f;
     [SerializeField] private string forwardMoveInputName = "Horizontal";
     [SerializeField] private KeyCode crouchKeyCode = KeyCode.S;
-    [SerializeField] private KeyCode runKeyCode = KeyCode.LeftShift;
     [SerializeField] private KeyCode shootingKeyCode = KeyCode.Mouse0;
     [SerializeField] private KeyCode quickRollKeyCode = KeyCode.Mouse3;
     [SerializeField] private Transform trackObj;
@@ -57,6 +56,9 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] private float jumpSpeed = 8.0f;
     private Vector3 move = Vector3.zero;
     [SerializeField] private float gravity = 20.0f;
+    public AudioSource moveAudioSource;
+    [SerializeField] private AudioClip runClip;
+    [SerializeField] private AudioClip backwardsWalkClip;
 
     // Start is called before the first frame update
     void Start()
@@ -167,6 +169,21 @@ public class PlayerMoveController : MonoBehaviour
         }
         animator.SetFloat(forwardMoveId, forwardMoveInput);
 
+        // paly move audio
+        if (characterController.isGrounded && forwardMoveInput >= 0.05) {
+            if (moveAudioSource.clip != runClip) {
+                moveAudioSource.clip = runClip;
+                moveAudioSource.Play();
+            }
+        } else if (characterController.isGrounded && forwardMoveInput <= -0.05) {
+            if (moveAudioSource.clip != backwardsWalkClip) {
+                moveAudioSource.clip = backwardsWalkClip;
+                moveAudioSource.Play();
+            }
+        } else {
+            moveAudioSource.clip = null;
+        }
+
         // judge crouch
         if (Input.GetKeyDown(crouchKeyCode)) {
             isCrouch = true;
@@ -177,13 +194,7 @@ public class PlayerMoveController : MonoBehaviour
         CroushOnCollider(isCrouch);
         animator.SetBool(isCrouchId, isCrouch);
 
-        // judge run
-        if (Input.GetKeyDown(runKeyCode)) {
-            isRun = true;
-        } else if (Input.GetKeyUp(runKeyCode)) {
-            isRun = false;
-        }
-        animator.SetBool(isRunId, isRun);
+
 
         // judge shooting
         if (Input.GetKeyDown(shootingKeyCode)) {
