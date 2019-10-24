@@ -84,7 +84,7 @@ public class WeaponManage : MonoBehaviour
         uIManage.SetReloadingUI(false);
     }
 
-    public void GetBullet(int addBullets) {
+    public void AddBullets(int addBullets) {
         ownBullets += addBullets;
         uIManage.UpdateBulletText();
     }

@@ -46,7 +46,7 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    public void addHP(int increment) {
+    public void AddHP(int increment) {
         currentHP = currentHP + increment > maxHP ? maxHP : currentHP + increment;
         uIManage.UpdateHPSlider((float)currentHP/maxHP);
     }

@@ -3209,9 +3209,20 @@ MonoBehaviour:
   bulletSpawn: {fileID: 4768967256607134937}
   bulletPrefab: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
     type: 3}
-  bulletSpeed: 15
+  bulletSpeed: 8
   bulletRotationOffset: {x: 90, y: 0, z: 0}
+  isShooting: 0
   rifleShooting: {fileID: 8300000, guid: 1b145bcffd767854fb0c71c37678ebaa, type: 3}
+  ikActive: 1
+  isHeadWatch: 1
+  lookAim: {fileID: 0}
+  autoAttack: 1
+  attackTimesThreshold: 5
+  attackRestTime: 1
+  isUnderRest: 0
+  target: {fileID: 0}
+  chestRotateOffset: {x: 0, y: 0, z: 0}
+  chest: {fileID: 4596650034846014912}
 --- !u!114 &4596650034846446371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3247,8 +3258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa2e7179ba109d4d9827489cb230d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 3.09
-  viewAngle: 82.49
+  viewPoint: {fileID: 4596650034846021696}
+  viewRadius: 10
+  viewAngle: 60
   responseTime: 1
   targetMask:
     serializedVersion: 2
