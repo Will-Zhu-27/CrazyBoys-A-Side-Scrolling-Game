@@ -47,32 +47,42 @@ public class WeaponManage : MonoBehaviour
     }
 
     public bool Reloading() {
-        if (audioSource.isPlaying || currentClipCapacity == maxClipCapacity) {
+        if (currentClipCapacity == maxClipCapacity) {
             return false;
         }
-
-        if (isInfiniteBullets) {
+        if (isInfiniteBullets || ownBullets >= 0) {
             audioSource.clip = handgunReload;
             audioSource.Play();
-            currentClipCapacity = maxClipCapacity;
+            StartCoroutine(ReloadingEvent());
+            return true;
         } else {
-            if (ownBullets <= 0) {
-                audioSource.clip = gunEmpty;
-                audioSource.Play();
-                return false;
-            }
-            audioSource.clip = handgunReload;
+            audioSource.clip = gunEmpty;
             audioSource.Play();
-            if (ownBullets >= maxClipCapacity) {
-                ownBullets -= maxClipCapacity;
-                currentClipCapacity = maxClipCapacity;
-            } else {
-                currentClipCapacity = ownBullets;
-                ownBullets = 0;
-            }
+            return false;
         }
-        playerUIManage.updateBulletText();
-        return true;
+    }
+
+    IEnumerator ReloadingEvent() {
+        playerUIManage.setReloadingUI(true);
+        while(true) {
+            if (audioSource.clip == handgunReload) {
+                if (audioSource.isPlaying == false) {
+                    if (ownBullets >= maxClipCapacity) {
+                        currentClipCapacity = maxClipCapacity;
+                        ownBullets -= maxClipCapacity;
+                    } else {
+                        currentClipCapacity = ownBullets;
+                        ownBullets = 0;
+                    }
+                    playerUIManage.updateBulletText();
+                    break;
+                }
+            } else {
+                break;
+            }
+            yield return null;
+        }
+        playerUIManage.setReloadingUI(false);
     }
 
     public void GetBullet(int addBullets) {
