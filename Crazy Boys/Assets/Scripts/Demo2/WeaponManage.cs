@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerUIManage))]
 [RequireComponent(typeof(AudioSource))]
 public class WeaponManage : MonoBehaviour
 {
@@ -17,14 +16,13 @@ public class WeaponManage : MonoBehaviour
     public AudioClip handgunShoot;
     public AudioClip handgunReload;
     public AudioClip gunEmpty;
-    private PlayerUIManage playerUIManage;
+    public UIManage uIManage;
 
     private void Awake() {
         currentClipCapacity = maxClipCapacity;
     }
     private void Start() {
         audioSource = this.GetComponent<AudioSource>();
-        playerUIManage = GetComponent<PlayerUIManage>();
     }
 
     public bool Fire(Vector3 direction, Vector3 startPosition, Quaternion startRotation) {
@@ -41,7 +39,7 @@ public class WeaponManage : MonoBehaviour
             bulletRigidbody.AddForce(direction * bulletSpeed, ForceMode.Impulse);
             audioSource.clip = handgunShoot;
             audioSource.Play();
-            playerUIManage.updateBulletText();
+            uIManage.UpdateBulletText();
             return true;
         }
     }
@@ -63,7 +61,7 @@ public class WeaponManage : MonoBehaviour
     }
 
     IEnumerator ReloadingEvent() {
-        playerUIManage.setReloadingUI(true);
+        uIManage.SetReloadingUI(true);
         while(true) {
             if (audioSource.clip == handgunReload) {
                 if (audioSource.isPlaying == false) {
@@ -74,7 +72,7 @@ public class WeaponManage : MonoBehaviour
                         currentClipCapacity = ownBullets;
                         ownBullets = 0;
                     }
-                    playerUIManage.updateBulletText();
+                    uIManage.UpdateBulletText();
                     break;
                 }
             } else {
@@ -82,11 +80,11 @@ public class WeaponManage : MonoBehaviour
             }
             yield return null;
         }
-        playerUIManage.setReloadingUI(false);
+        uIManage.SetReloadingUI(false);
     }
 
     public void GetBullet(int addBullets) {
         ownBullets += addBullets;
-        playerUIManage.updateBulletText();
+        uIManage.UpdateBulletText();
     }
 }

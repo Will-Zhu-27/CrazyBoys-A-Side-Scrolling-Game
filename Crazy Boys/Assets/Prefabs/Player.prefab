@@ -3919,7 +3919,6 @@ GameObject:
   - component: {fileID: 940471781}
   - component: {fileID: 940471774}
   - component: {fileID: 62670746}
-  - component: {fileID: 62670747}
   - component: {fileID: 62670748}
   m_Layer: 10
   m_Name: Player
@@ -4012,7 +4011,6 @@ MonoBehaviour:
   crouchingBackwardSpeed: 1.5
   forwardMoveInputName: Horizontal
   crouchKeyCode: 115
-  runKeyCode: 304
   shootingKeyCode: 323
   quickRollKeyCode: 326
   trackObj: {fileID: 662760207348135975}
@@ -4029,6 +4027,9 @@ MonoBehaviour:
   isJump: 0
   jumpSpeed: 7
   gravity: 10
+  moveAudioSource: {fileID: 5386202325377070606}
+  runClip: {fileID: 8300000, guid: 0c58744c3b6fdd844b8348066c3f703e, type: 3}
+  walkClip: {fileID: 8300000, guid: 6597a368cd74a924eaedb0171d5b28d3, type: 3}
 --- !u!114 &1074792657440928652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4182,7 +4183,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4338,21 +4339,7 @@ MonoBehaviour:
   handgunShoot: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
   handgunReload: {fileID: 8300000, guid: b0d51244fd32fc647960320540b32f66, type: 3}
   gunEmpty: {fileID: 8300000, guid: 09f9910ffba60da45abff42dfac5f692, type: 3}
---- !u!114 &62670747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1074792657440928640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7710470b5e4ac4e3090147dbde984db5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletText: {fileID: 0}
-  reloadingUI: {fileID: 0}
-  weaponManage: {fileID: 62670746}
+  uIManage: {fileID: 0}
 --- !u!114 &62670748
 MonoBehaviour:
   m_ObjectHideFlags: 0
