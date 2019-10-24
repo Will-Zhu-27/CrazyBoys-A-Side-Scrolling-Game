@@ -46,7 +46,7 @@ public class WeaponManage : MonoBehaviour
     }
 
     public bool Reloading() {
-        if (currentClipCapacity == maxClipCapacity) {
+        if (currentClipCapacity == maxClipCapacity || (audioSource.clip == handgunReload && audioSource.isPlaying)) {
             return false;
         }
         if (isInfiniteBullets || ownBullets >= 0) {

@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 9dc2ba3a90901ce4fba14f9d035afa06
+guid: 957c58b2e8aaede499821be164ed5c18
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Quick Roll
+    second: Spin
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -35,38 +35,38 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Quick Roll
+      name: Spin
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 84
+      lastFrame: 104
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0
+      level: -0.09
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000000000000000000000000000000000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.15444617
+      - time: 0.08125
         functionName: SetInvincible
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.8315132
+      - time: 0.98593754
         functionName: SetInvincible
         data: 
         objectReferenceParameter: {instanceID: 0}

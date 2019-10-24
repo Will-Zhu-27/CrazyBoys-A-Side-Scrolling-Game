@@ -35,7 +35,8 @@ public class UIManage : MonoBehaviour
             reloadingUI.SetActive(active);
             reloadingUIAnimator.SetBool("isReloading", true);
         } else {
-            StartCoroutine(ReloadingUIDisableEvent());
+            // StartCoroutine(ReloadingUIDisableEvent());
+            reloadingUIAnimator.SetBool("isReloading", false);
         }
         
     }
@@ -43,9 +44,9 @@ public class UIManage : MonoBehaviour
     IEnumerator ReloadingUIDisableEvent() {
         reloadingUIAnimator.SetBool("isReloading", false);
         while(true) {
-            if (reloadingUI.active == true) {
-                break;
-            }
+            // if (reloadingUI.active == true) {
+            //     break;
+            // }
             if (!reloadingUIAnimator.GetCurrentAnimatorStateInfo(1).IsName("UIDisappear") && !reloadingUIAnimator.IsInTransition(1)) {
                 break;
             }

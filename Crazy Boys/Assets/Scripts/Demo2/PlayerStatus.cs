@@ -38,7 +38,7 @@ public class PlayerStatus : MonoBehaviour
         animator.Play("Mutant Dying");
     }
 
-    private void SetVincible(int status) {
+    private void SetInvincible(int status) {
         if (status != 0) {
             this.isVincible = true;
         } else {
