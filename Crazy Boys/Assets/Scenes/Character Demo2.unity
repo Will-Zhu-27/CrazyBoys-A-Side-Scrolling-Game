@@ -839,6 +839,11 @@ MonoBehaviour:
   itemDropRate: 0.5
   itemPrefab: {fileID: 535849144648786322, guid: 5574b2bbf24d76a4fb8e0c295a6d9a61,
     type: 3}
+  spinCoolDown: 1
+  uIManage: {fileID: 497053989}
+  timeScaleChange: 0.5
+  timePowerTime: 3
+  recoverTimePowerTime: 5
 --- !u!4 &1252978054
 Transform:
   m_ObjectHideFlags: 0
@@ -847,7 +852,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252978052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.45897, y: 3.1434555, z: -3.371279}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1709,10 +1714,6 @@ PrefabInstance:
       propertyPath: uIManage
       value: 
       objectReference: {fileID: 497053989}
-    - target: {fileID: 62670746, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
-      propertyPath: handgunReload
-      value: 
-      objectReference: {fileID: 8300000, guid: 0cb107d884900644bbdd3c41b0c4f07c, type: 3}
     - target: {fileID: 1074792657440574220, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1772,27 +1773,6 @@ PrefabInstance:
       propertyPath: uIManage
       value: 
       objectReference: {fileID: 497053989}
-    - target: {fileID: 940471774, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
-      propertyPath: maxHP
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 940471774, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
-      propertyPath: isVincible
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 662760208707417047, guid: 2e91924478ad8664b9fb8a3b248fd1d2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 69352535, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 62670748, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
-      propertyPath: timeScale
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
 --- !u!1001 &956946484790064521

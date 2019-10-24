@@ -267,7 +267,7 @@ public class PlayerMoveController : MonoBehaviour
         if (!isAutoTrunAround) {
             return;
         }
-        if (!isTurningAround && this.transform.InverseTransformPoint(trackObj.position).z < trunAroundThreshold) {
+        if (!isTurningAround && this.transform.InverseTransformPoint(trackObj.position).z < trunAroundThreshold && !animator.GetCurrentAnimatorStateInfo(0).IsName("Spin")) {
             print("turn around event start");
             StartCoroutine(TurnAroundEvent());
         }

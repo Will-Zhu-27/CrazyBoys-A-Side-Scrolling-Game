@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 69352539}
   - component: {fileID: 69352538}
   - component: {fileID: 2510167988804598271}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Leg Collider
   m_TagString: Melee
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &662760208707417046
 Transform:
   m_ObjectHideFlags: 0
@@ -4013,6 +4013,7 @@ MonoBehaviour:
   crouchKeyCode: 115
   shootingKeyCode: 323
   quickRollKeyCode: 326
+  spinKeyCode: 119
   trackObj: {fileID: 662760207348135975}
   trunAroundThreshold: -0.1
   turnAroundTime: 0.3
@@ -4277,7 +4278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a91b29480622d1429a61ac635e850cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAttackKeyCode: 101
+  meleeAttackKeyCode: 327
   meleeDamage: 100
   meleeScript: {fileID: 2510167988804598271}
   bulletPrefab: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
@@ -4313,9 +4314,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c529e4a547c1344995c17f677ec1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10000
+  maxHP: 500
   currentHP: 0
   isVincible: 0
+  uIManage: {fileID: 0}
 --- !u!114 &62670746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4337,7 +4339,7 @@ MonoBehaviour:
   bulletRotationOffset: {x: 90, y: 0, z: 0}
   bulletSpeed: 10
   handgunShoot: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
-  handgunReload: {fileID: 8300000, guid: b0d51244fd32fc647960320540b32f66, type: 3}
+  handgunReload: {fileID: 8300000, guid: 0cb107d884900644bbdd3c41b0c4f07c, type: 3}
   gunEmpty: {fileID: 8300000, guid: 09f9910ffba60da45abff42dfac5f692, type: 3}
   uIManage: {fileID: 0}
 --- !u!114 &62670748
@@ -4352,7 +4354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142397913c90048b4bb8a613c313bc69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 0.3
   slowActionKeyCode: 324
 --- !u!1 &1074792657440929878
 GameObject:

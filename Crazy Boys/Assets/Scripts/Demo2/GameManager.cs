@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
     public float itemDropRate = 0.5f;
     public GameObject itemPrefab;
     public float spinCoolDown = 1.0f;
+    public UIManage uIManage;
+    [Range(0, 1.0f)]
+    public float timeScaleChange = 0.5f;
+    public float timePowerTime = 3f;
+    public float recoverTimePowerTime = 5f;
 
     public enum itemType {Health, Ammo};
     // Start is called before the first frame update
