@@ -9,6 +9,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private int currentHP = 0;
     [SerializeField] private bool isVincible = false;
     private Animator animator;
+    public UIManage uIManage;
 
     private void Start() {
         currentHP = maxHP;
@@ -24,6 +25,7 @@ public class PlayerStatus : MonoBehaviour
         if (currentHP <= 0) {
             Die();
         }
+        uIManage.UpdateHPSlider((float)currentHP/maxHP);
         return true;
     }
 

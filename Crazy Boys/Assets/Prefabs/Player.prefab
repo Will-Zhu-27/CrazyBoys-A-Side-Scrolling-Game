@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 74.83264, y: 20.098375, z: 7.79783}
-  m_Center: {x: -36.916313, y: -0.65199965, z: 0.6085952}
+  m_Size: {x: 92.25848, y: 20.098375, z: 7.79783}
+  m_Center: {x: -45.6292, y: -0.65200514, z: 0.6085946}
 --- !u!114 &69352539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3914,9 +3914,12 @@ GameObject:
   - component: {fileID: 1074792657440928652}
   - component: {fileID: 1074792657440928655}
   - component: {fileID: 678469320}
+  - component: {fileID: 5386202325377070606}
   - component: {fileID: 940471773}
   - component: {fileID: 940471781}
   - component: {fileID: 940471774}
+  - component: {fileID: 62670746}
+  - component: {fileID: 62670748}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -4002,14 +4005,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFaceForward: 1
-  forwardWalkSpeed: 2
-  backwardWalkSpeed: 1
-  crouchingForwardWalkSpeed: 1.5
-  crouchingBackwardWalkSpeed: 0.75
-  runSpeed: 4
+  forwardSpeed: 5
+  backwardSpeed: 3
+  crouchingForwardSpeed: 3
+  crouchingBackwardSpeed: 1.5
   forwardMoveInputName: Horizontal
   crouchKeyCode: 115
-  runKeyCode: 304
   shootingKeyCode: 323
   quickRollKeyCode: 326
   trackObj: {fileID: 662760207348135975}
@@ -4024,31 +4025,11 @@ MonoBehaviour:
   isAutoTrunAround: 1
   jumpKeyCode: 32
   isJump: 0
-  jumpFallOff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1.0023499
-      inSlope: 0.2339501
-      outSlope: 0.2339501
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.15958191
-    - serializedVersion: 3
-      time: 1
-      value: -0.0000076293945
-      inSlope: 0.1485195
-      outSlope: 0.1485195
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.17373574
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jumpMultiplier: 10
+  jumpSpeed: 7
+  gravity: 10
+  moveAudioSource: {fileID: 5386202325377070606}
+  runClip: {fileID: 8300000, guid: 0c58744c3b6fdd844b8348066c3f703e, type: 3}
+  walkClip: {fileID: 8300000, guid: 6597a368cd74a924eaedb0171d5b28d3, type: 3}
 --- !u!114 &1074792657440928652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4056,7 +4037,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074792657440928640}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e494b9797fc6a4e08a18c8de5bb2cf7d, type: 3}
   m_Name: 
@@ -4188,6 +4169,102 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &5386202325377070606
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074792657440928640}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &940471773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4200,7 +4277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a91b29480622d1429a61ac635e850cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAttackKeyCode: 327
+  meleeAttackKeyCode: 101
   meleeDamage: 100
   meleeScript: {fileID: 2510167988804598271}
   bulletPrefab: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
@@ -4208,9 +4285,7 @@ MonoBehaviour:
   rightBulletSpawn: {fileID: 662760208711815781}
   leftBulletSpawn: {fileID: 662760206681408829}
   shootingKeyCode: 323
-  handgunShoot: {fileID: 8300000, guid: be64544bade297e4d872dd74c66256d2, type: 3}
   reloadingKeyCode: 114
-  handgunReload: {fileID: 8300000, guid: e1d79f4a0c7873742babc5f6e9ff800e, type: 3}
   bulletSpeed: 10
   bulletRotationOffset: {x: 90, y: 0, z: 0}
 --- !u!65 &940471781
@@ -4241,6 +4316,44 @@ MonoBehaviour:
   maxHP: 10000
   currentHP: 0
   isVincible: 0
+--- !u!114 &62670746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074792657440928640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb40b5a016da3a246abd479224429a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInfiniteBullets: 0
+  ownBullets: 1000
+  maxClipCapacity: 16
+  currentClipCapacity: 16
+  bulletPrefab: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
+    type: 3}
+  bulletRotationOffset: {x: 90, y: 0, z: 0}
+  bulletSpeed: 10
+  handgunShoot: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+  handgunReload: {fileID: 8300000, guid: b0d51244fd32fc647960320540b32f66, type: 3}
+  gunEmpty: {fileID: 8300000, guid: 09f9910ffba60da45abff42dfac5f692, type: 3}
+  uIManage: {fileID: 0}
+--- !u!114 &62670748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074792657440928640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 142397913c90048b4bb8a613c313bc69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 0.3
+  slowActionKeyCode: 324
 --- !u!1 &1074792657440929878
 GameObject:
   m_ObjectHideFlags: 0
