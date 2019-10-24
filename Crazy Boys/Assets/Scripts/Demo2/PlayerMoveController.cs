@@ -58,7 +58,7 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] private float gravity = 20.0f;
     public AudioSource moveAudioSource;
     [SerializeField] private AudioClip runClip;
-    [SerializeField] private AudioClip backwardsWalkClip;
+    [SerializeField] private AudioClip walkClip;
 
     // Start is called before the first frame update
     void Start()
@@ -169,21 +169,6 @@ public class PlayerMoveController : MonoBehaviour
         }
         animator.SetFloat(forwardMoveId, forwardMoveInput);
 
-        // paly move audio
-        if (characterController.isGrounded && forwardMoveInput >= 0.05) {
-            if (moveAudioSource.clip != runClip) {
-                moveAudioSource.clip = runClip;
-                moveAudioSource.Play();
-            }
-        } else if (characterController.isGrounded && forwardMoveInput <= -0.05) {
-            if (moveAudioSource.clip != backwardsWalkClip) {
-                moveAudioSource.clip = backwardsWalkClip;
-                moveAudioSource.Play();
-            }
-        } else {
-            moveAudioSource.clip = null;
-        }
-
         // judge crouch
         if (Input.GetKeyDown(crouchKeyCode)) {
             isCrouch = true;
@@ -217,6 +202,26 @@ public class PlayerMoveController : MonoBehaviour
             StartCoroutine(JumpEvent());
         }
         animator.SetBool(isJumpId, isJump);
+
+        // paly move audio
+        if (isCrouch && characterController.isGrounded && (forwardMoveInput >= 0.05 || forwardMoveInput <= -0.05)) {
+            if (moveAudioSource.clip != walkClip) {
+                moveAudioSource.clip = walkClip;
+                moveAudioSource.Play();
+            }
+        } else if (characterController.isGrounded && forwardMoveInput >= 0.05) {
+            if (moveAudioSource.clip != runClip) {
+                moveAudioSource.clip = runClip;
+                moveAudioSource.Play();
+            }
+        } else if (characterController.isGrounded && forwardMoveInput <= -0.05) {
+            if (moveAudioSource.clip != walkClip) {
+                moveAudioSource.clip = walkClip;
+                moveAudioSource.Play();
+            }
+        } else {
+            moveAudioSource.clip = null;
+        }
     }
 
     IEnumerator JumpEvent() {
