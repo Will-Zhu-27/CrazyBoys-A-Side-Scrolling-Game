@@ -43,7 +43,7 @@ public class PlayerAttackController : MonoBehaviour
             } else {
                 start = leftBulletSpawn;
             }
-            weaponManage.Fire(start.forward, start.position, start.rotation);
+            weaponManage.Fire(start.forward, start.position, start.rotation, this.gameObject.layer);
             isRightShooting = !isRightShooting;
         }
         if (Input.GetKeyDown(reloadingKeyCode)) {

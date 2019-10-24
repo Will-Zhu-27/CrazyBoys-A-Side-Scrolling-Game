@@ -84,9 +84,14 @@ public class Enemy : MonoBehaviour
     // }
 
     /// <summary> 
-    /// “Falling Back Death” Clip Event
+    /// trigger when die clip is over
     /// </summary> 
     private void MissionComplete() {
+        if (Random.Range(0.0f, 1.0f) <= GameManager.Instance.itemDropRate) {
+            GameObject item = Instantiate(GameManager.Instance.itemPrefab, new Vector3(transform.position.x, transform.position.y, 0.0f), Quaternion.identity);
+        }
+
+        
         Destroy(this.gameObject);
     }
 
@@ -96,6 +101,7 @@ public class Enemy : MonoBehaviour
     private void ShootingEvent() {
         currentAttackTimes++;
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        bullet.layer = this.gameObject.layer;
         bullet.transform.Rotate(bulletRotationOffset);
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
         bulletRigidbody.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
@@ -127,7 +133,15 @@ public class Enemy : MonoBehaviour
         if (enemyFieldOfView.visibleTargets.Count != 0) {
             Vector3 tempVector = target.position - this.chest.transform.position;
             tempVector.z = 0;
-            Quaternion temp = Quaternion.FromToRotation(tempVector, Vector3.left);
+            Vector3 toDirection;
+            if (tempVector.x > 0.1) {
+                toDirection = Vector3.right;
+            } else if(tempVector.x < -0.1) {
+                toDirection = Vector3.left;
+            } else {
+                return;
+            }
+            Quaternion temp = Quaternion.FromToRotation(tempVector, toDirection);
             this.chest.transform.Rotate(-(temp.eulerAngles));
         }
         
