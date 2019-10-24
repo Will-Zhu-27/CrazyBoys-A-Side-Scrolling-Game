@@ -12,11 +12,18 @@ public class UIManage : MonoBehaviour
 
     public Image hpImageSlider;
     public Image powerImageSlider;
+    public RectTransform crossHair;
     // Start is called before the first frame update
     void Start()
     {
         UpdateBulletText();
         reloadingUIAnimator = reloadingUI.GetComponent<Animator>();
+        Cursor.visible = false;
+        crossHair.position = Input.mousePosition;
+    }
+
+    void Update() {
+        crossHair.position = Input.mousePosition;
     }
 
     public void UpdateBulletText() {

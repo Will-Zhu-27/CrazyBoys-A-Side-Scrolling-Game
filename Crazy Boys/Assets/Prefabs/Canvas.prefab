@@ -1,5 +1,79 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &612686516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 612686517}
+  - component: {fileID: 612686519}
+  - component: {fileID: 612686518}
+  m_Layer: 5
+  m_Name: CrossHair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &612686517
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612686516}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_Children: []
+  m_Father: {fileID: 956946484326565037}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &612686519
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612686516}
+  m_CullTransparentMesh: 0
+--- !u!114 &612686518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612686516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9433962, g: 0.45750916, b: 0.14684942, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 522e2eec793857746ad0f1fa3fa2767b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
 --- !u!1 &956946482745489006
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +391,7 @@ GameObject:
   - component: {fileID: 956946484326565034}
   - component: {fileID: 956946484326565035}
   - component: {fileID: 956946484326565032}
+  - component: {fileID: 497053989}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -337,6 +412,7 @@ RectTransform:
   m_Children:
   - {fileID: 956946483315308136}
   - {fileID: 956946484521007175}
+  - {fileID: 612686517}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -405,6 +481,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &497053989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956946484326565033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd42fec6a4da9354e8c1557aae1304cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletText: {fileID: 956946483557967168}
+  reloadingUI: {fileID: 3664936667285841517}
+  weaponManage: {fileID: 0}
+  hpImageSlider: {fileID: 956946484523669455}
+  powerImageSlider: {fileID: 956946484523601717}
+  crossHair: {fileID: 612686517}
 --- !u!1 &956946484442617894
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +585,7 @@ GameObject:
   - component: {fileID: 956946484520732709}
   - component: {fileID: 956946484523669455}
   m_Layer: 5
-  m_Name: Status Fill 00
+  m_Name: HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +735,7 @@ GameObject:
   - component: {fileID: 956946484520685283}
   - component: {fileID: 956946484523601717}
   m_Layer: 5
-  m_Name: Status Fill 01
+  m_Name: Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -837,6 +931,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5163dae1cd8f1e148a414eae42afad27, type: 3}
+--- !u!1 &3664936667285841517 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1097184796035446702, guid: 5163dae1cd8f1e148a414eae42afad27,
+    type: 3}
+  m_PrefabInstance: {fileID: 4460115838540091843}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3664936667285841522 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1097184796035446705, guid: 5163dae1cd8f1e148a414eae42afad27,
