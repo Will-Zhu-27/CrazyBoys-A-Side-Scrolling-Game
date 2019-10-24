@@ -12,15 +12,15 @@ using UnityEngine;
 public class PlayerMoveController : MonoBehaviour
 {
     [SerializeField] private bool isFaceForward = true;
-    [SerializeField] private float forwardWalkSpeed = 2f;
-    [SerializeField] private float backwardWalkSpeed = 1f;
-    [SerializeField] private float crouchingForwardWalkSpeed = 1.5f;
-    [SerializeField] private float crouchingBackwardWalkSpeed = 0.75f;
-    [SerializeField] private float runSpeed = 4f;
+    [SerializeField] private float forwardSpeed = 2f;
+    [SerializeField] private float backwardSpeed = 1f;
+    [SerializeField] private float crouchingForwardSpeed = 1.5f;
+    [SerializeField] private float crouchingBackwardSpeed = 0.75f;
+    // [SerializeField] private float runSpeed = 4f;
     [SerializeField] private string forwardMoveInputName = "Horizontal";
     [SerializeField] private KeyCode crouchKeyCode = KeyCode.S;
-    [SerializeField] private KeyCode runKeyCode = KeyCode.LeftShift;
     [SerializeField] private KeyCode shootingKeyCode = KeyCode.Mouse0;
+    [SerializeField] private KeyCode quickRollKeyCode = KeyCode.Mouse3;
     [SerializeField] private Transform trackObj;
     [SerializeField] private float trunAroundThreshold = -0.1f;
     [SerializeField] private float turnAroundTime = 0.3f;
@@ -47,6 +47,18 @@ public class PlayerMoveController : MonoBehaviour
     private Quaternion startRotation;
     private Quaternion endRotation;
     private Vector3 targetDirection;
+    private bool isRoll;
+    private int isRollId;
+    [SerializeField] private bool isAutoTrunAround = true;
+    [SerializeField] private KeyCode jumpKeyCode = KeyCode.Space;
+    [SerializeField] private bool isJump = false;
+    private int isJumpId;
+    [SerializeField] private float jumpSpeed = 8.0f;
+    private Vector3 move = Vector3.zero;
+    [SerializeField] private float gravity = 20.0f;
+    public AudioSource moveAudioSource;
+    [SerializeField] private AudioClip runClip;
+    [SerializeField] private AudioClip walkClip;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +72,8 @@ public class PlayerMoveController : MonoBehaviour
         forwardMoveId = Animator.StringToHash("forwardMove");
         isCrouchId = Animator.StringToHash("isCrouch");
         isRunId = Animator.StringToHash("isRun");
+        isRollId = Animator.StringToHash("isRoll");
+        isJumpId = Animator.StringToHash("isJump");
     }
 
     // Update is called once per frame
@@ -68,38 +82,84 @@ public class PlayerMoveController : MonoBehaviour
         HandleUserInput();
         AutoTurnAround();
         CharacterMove();
-        // if (!characterController.isGrounded) {
-        //     Debug.Log("play is not at ground!");
-        // }
     }
-
+    
     private void CharacterMove() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Kick")) {
-            animator.SetBool(isCrouchId, false);
-            return;
-        }
-        if (isTurningAround) {
-            return;
-        }
-        float forwardMovement = 0f;
-        if (forwardMoveInput > 0.05f) {
-            if (isRun && !isCrouch) {
-                forwardMovement = forwardMoveInput * runSpeed;
-            } else if (!isCrouch){
-                forwardMovement = forwardMoveInput * forwardWalkSpeed;
-            } else {
-                forwardMovement = forwardMoveInput * crouchingForwardWalkSpeed;
+        if (characterController.isGrounded) {
+            // We are grounded, so recalculate
+            // move direction directly from axes
+            AnimatorStateInfo animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (animatorStateInfo.IsName("Kick"))
+            {
+                // when player is kicking, stop move
+                animator.SetBool(isCrouchId, false);
+                move = Vector3.zero;
             }
-        } else if (forwardMoveInput < -0.05f) {
-            if (!isCrouch) {
-                forwardMovement = forwardMoveInput * backwardWalkSpeed;
-            } else {
-                forwardMovement = forwardMoveInput * crouchingBackwardWalkSpeed;
+            else
+            {
+                float xInput = Input.GetAxis("Horizontal");
+                move = new Vector3(xInput, 0.0f, 0.0f);
+                if (isFaceForward)
+                {
+                    if (xInput > 0.05)
+                    {
+                        if (isCrouch) {
+                            move *= crouchingForwardSpeed;
+                        } else {
+                            move *= forwardSpeed;
+                        }
+                    }
+                    else if (xInput < -0.05)
+                    {
+                        if (isCrouch) {
+                            move *= crouchingBackwardSpeed;
+                        } else {
+                            move *= backwardSpeed;
+                        }
+                    }
+                    else
+                    {
+                        move = Vector3.zero;
+                    }
+                }
+                else
+                {
+                    if (xInput > 0.05)
+                    {
+                        if (isCrouch) {
+                            move *= crouchingBackwardSpeed;
+                        } else {
+                            move *= backwardSpeed;
+                        }
+                    }
+                    else if (xInput < -0.05)
+                    {
+                        if (isCrouch) {
+                            move *= crouchingForwardSpeed;
+                        } else {
+                            move *= forwardSpeed;
+                        }
+                    }
+                    else
+                    {
+                        move = Vector3.zero;
+                    }
+                }
             }
             
+            if (!animatorStateInfo.IsName("Quick Roll") && Input.GetKeyDown(jumpKeyCode))
+            {
+                move.y = jumpSpeed;
+            }
         }
-        Vector3 forwardVect = transform.TransformDirection(Vector3.forward).normalized * forwardMovement;
-        characterController.SimpleMove(forwardVect);
+
+        // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
+        // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
+        // as an acceleration (ms^-2)
+        move.y -= gravity * Time.deltaTime;
+
+        // Move the controller
+        characterController.Move(move * Time.deltaTime);
     }
 
     private void HandleUserInput() {
@@ -119,13 +179,7 @@ public class PlayerMoveController : MonoBehaviour
         CroushOnCollider(isCrouch);
         animator.SetBool(isCrouchId, isCrouch);
 
-        // judge run
-        if (Input.GetKeyDown(runKeyCode)) {
-            isRun = true;
-        } else if (Input.GetKeyUp(runKeyCode)) {
-            isRun = false;
-        }
-        animator.SetBool(isRunId, isRun);
+
 
         // judge shooting
         if (Input.GetKeyDown(shootingKeyCode)) {
@@ -133,20 +187,66 @@ public class PlayerMoveController : MonoBehaviour
         } else if (Input.GetKeyUp(shootingKeyCode)) {
             isShooting = false;
         }
+
+        // quick roll
+        if (Input.GetKeyDown(quickRollKeyCode)) {
+            print("quick roll");
+            isRoll = true;
+        } else if (Input.GetKeyUp(quickRollKeyCode)) {
+            isRoll = false;
+        }
+        animator.SetBool(isRollId, isRoll);
+
+        // jump
+        if (!this.isJump && !this.isCrouch && Input.GetKey(jumpKeyCode) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling")) {
+            StartCoroutine(JumpEvent());
+        }
+        animator.SetBool(isJumpId, isJump);
+
+        // paly move audio
+        if (isCrouch && characterController.isGrounded && (forwardMoveInput >= 0.05 || forwardMoveInput <= -0.05)) {
+            if (moveAudioSource.clip != walkClip) {
+                moveAudioSource.clip = walkClip;
+                moveAudioSource.Play();
+            }
+        } else if (characterController.isGrounded && forwardMoveInput >= 0.05) {
+            if (moveAudioSource.clip != runClip) {
+                moveAudioSource.clip = runClip;
+                moveAudioSource.Play();
+            }
+        } else if (characterController.isGrounded && forwardMoveInput <= -0.05) {
+            if (moveAudioSource.clip != walkClip) {
+                moveAudioSource.clip = walkClip;
+                moveAudioSource.Play();
+            }
+        } else {
+            moveAudioSource.clip = null;
+        }
+    }
+
+    IEnumerator JumpEvent() {
+        this.isJump = true;
+        while(!characterController.isGrounded) {
+            yield return null;
+        }
+        this.isJump = false;
     }
 
     private void AutoTurnAround() {
-        if (!isTurningAround && this.transform.InverseTransformPoint(trackObj.position).z < trunAroundThreshold) {
-            isTurningAround = true;
-            startRotateTime = Time.time;
+        if (!isAutoTrunAround) {
+            return;
         }
-        if (isTurningAround) {
-            TurnAround();
+        if (!isTurningAround && this.transform.InverseTransformPoint(trackObj.position).z < trunAroundThreshold) {
+            print("turn around event start");
+            StartCoroutine(TurnAroundEvent());
         }
     }
 
-    private void TurnAround()
-    {
+    IEnumerator TurnAroundEvent() {
+        
+        isTurningAround = true;
+        startRotateTime = Time.time;
+        float l;
         if (isFaceForward)
         {
             startRotation = Quaternion.Euler(0, 90f, 0);
@@ -159,12 +259,14 @@ public class PlayerMoveController : MonoBehaviour
             endRotation = Quaternion.Euler(0, 90f, 0);
             targetDirection = new Vector3(0, 90f, 0);
         }
-        float l = Mathf.InverseLerp(startRotateTime, startRotateTime + turnAroundTime, Time.time);
-        transform.rotation = Quaternion.Lerp(startRotation, endRotation, l);
-        if (this.transform.rotation.eulerAngles.Equals(targetDirection)) {
-            isTurningAround = false;
-            isFaceForward = !isFaceForward;
-        }
+        do {
+            l = Mathf.InverseLerp(startRotateTime, startRotateTime + turnAroundTime, Time.time);
+            transform.rotation = Quaternion.Lerp(startRotation, endRotation, l);
+            yield return null;
+        } while(transform.rotation !=  endRotation);
+        isTurningAround = false;
+        isFaceForward = !isFaceForward;
+        print("turn around event end");
     }
 
     private void CroushOnCollider(bool isCrouch) {
@@ -180,4 +282,5 @@ public class PlayerMoveController : MonoBehaviour
             this.hitBox.size = this.standHitBoxSize;
         }
     }
+
 }

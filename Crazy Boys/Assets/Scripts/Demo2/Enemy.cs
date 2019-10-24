@@ -4,9 +4,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(EnemyFieldOfView))]
 public class Enemy : MonoBehaviour
 {
-    // public Transform skin;
     public int maxHp = 100;
     [SerializeField] private int currentHp;
     public Transform bulletSpawn;
@@ -17,39 +17,49 @@ public class Enemy : MonoBehaviour
     private float tempTime = 0;
     private float alpha;
     private bool isDie = false;
-    private bool isShooting = false;
+    [SerializeField] private bool isShooting = false;
     private int isShootingId;
     private AudioSource audioSource;
     [SerializeField] private AudioClip rifleShooting;
+    public bool ikActive = true;
+    public bool isHeadWatch = true;
+    private EnemyFieldOfView enemyFieldOfView;
+    public Transform lookAim;
+    public bool autoAttack = true;
+    
+    public int attackTimesThreshold = 5;
+    [SerializeField] private float attackRestTime = 2f;
+    private int currentAttackTimes = 0;
 
+    [HideInInspector] public bool isUnderRest = false;
+    public Transform target;
+    public Vector3 chestRotateOffset = Vector3.zero;
+    public Transform chest;
     private void Start() {
         currentHp = maxHp;
         animator = this.GetComponent<Animator>();
         isShootingId = Animator.StringToHash("isShooting");
+        animator.SetBool(isShootingId, isShooting);
         audioSource = this.GetComponent<AudioSource>();
+        enemyFieldOfView = this.GetComponent<EnemyFieldOfView>();
     }
-
-    // private void Update() {
-    //     if (Input.GetKeyDown(KeyCode.G)) {
-    //         isShooting = true;
-    //     } else if (Input.GetKeyUp(KeyCode.G)) {
-    //         isShooting = false;
-    //     }
-    //     animator.SetBool(isShootingId, isShooting);
-    // }
 
     public void setIsShooting(bool isShooting) {
-        this.isShooting = isShooting;
-        animator.SetBool(isShootingId, isShooting);
+        if (this.isUnderRest) {
+            this.isShooting = false;
+        } else {
+            this.isShooting = isShooting;
+        }
+        animator.SetBool(isShootingId, this.isShooting);
     }
 
-    public void TakeDamage(int damage) {
+    public bool TakeDamage(int damage) {
         currentHp -= damage;
         print("current hp: " + currentHp);
         if (currentHp <= 0) {
-            // animator.Play("Falling Back Death");
             Die();
         }
+        return true;
     }
 
     private void Die() {
@@ -84,6 +94,7 @@ public class Enemy : MonoBehaviour
     /// “Gunplay” Clip Event
     /// </summary> 
     private void ShootingEvent() {
+        currentAttackTimes++;
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
         bullet.transform.Rotate(bulletRotationOffset);
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
@@ -91,5 +102,42 @@ public class Enemy : MonoBehaviour
 
         audioSource.clip = rifleShooting;
         audioSource.Play();
+        
+        if (currentAttackTimes >= attackTimesThreshold) {
+            StartCoroutine("Rest", this.attackRestTime);
+        }
+    }
+
+    void OnAnimatorIK() {
+        if (ikActive && enemyFieldOfView.visibleTargets.Count != 0) {
+            Transform target = enemyFieldOfView.visibleTargets[0];
+            if (isHeadWatch) {
+                animator.SetLookAtWeight(1);
+                animator.SetLookAtPosition(enemyFieldOfView.visibleTargets[0].position);
+            }
+            // Quaternion chestRotate = animator.GetBoneTransform(HumanBodyBones.Chest).rotation;
+            // animator.SetBoneLocalRotation(HumanBodyBones.Chest, Quaternion.Euler(this.chestRotateOffset));
+            // animator.GetBoneTransform(HumanBodyBones.UpperChest).rotation
+            
+            
+        }
+	}
+
+    void LateUpdate() {
+        if (enemyFieldOfView.visibleTargets.Count != 0) {
+            Vector3 tempVector = target.position - this.chest.transform.position;
+            tempVector.z = 0;
+            Quaternion temp = Quaternion.FromToRotation(tempVector, Vector3.left);
+            this.chest.transform.Rotate(-(temp.eulerAngles));
+        }
+        
+    }
+
+    IEnumerator Rest(float restTime) {
+        this.setIsShooting(false);
+        this.isUnderRest = true;
+        yield return new WaitForSeconds(restTime);
+        this.isUnderRest = false;
+        this.currentAttackTimes = 0;
     }
 }
