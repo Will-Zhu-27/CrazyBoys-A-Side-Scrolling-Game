@@ -21,6 +21,7 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] private KeyCode crouchKeyCode = KeyCode.S;
     [SerializeField] private KeyCode shootingKeyCode = KeyCode.Mouse0;
     [SerializeField] private KeyCode quickRollKeyCode = KeyCode.Mouse3;
+    [SerializeField] private KeyCode spinKeyCode = KeyCode.W;
     [SerializeField] private Transform trackObj;
     [SerializeField] private float trunAroundThreshold = -0.1f;
     [SerializeField] private float turnAroundTime = 0.3f;
@@ -59,6 +60,9 @@ public class PlayerMoveController : MonoBehaviour
     public AudioSource moveAudioSource;
     [SerializeField] private AudioClip runClip;
     [SerializeField] private AudioClip walkClip;
+    private bool isSpin;
+    private int isSpinId;
+    private bool isCoolDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +78,7 @@ public class PlayerMoveController : MonoBehaviour
         isRunId = Animator.StringToHash("isRun");
         isRollId = Animator.StringToHash("isRoll");
         isJumpId = Animator.StringToHash("isJump");
+        isSpinId = Animator.StringToHash("isSpin");
     }
 
     // Update is called once per frame
@@ -203,6 +208,14 @@ public class PlayerMoveController : MonoBehaviour
         }
         animator.SetBool(isJumpId, isJump);
 
+        // spin
+        if (!isCoolDown) {
+           if (Input.GetKey(spinKeyCode)) {
+                StartCoroutine(spinEvent());
+            }
+        }
+        
+
         // paly move audio
         if (isCrouch && characterController.isGrounded && (forwardMoveInput >= 0.05 || forwardMoveInput <= -0.05)) {
             if (moveAudioSource.clip != walkClip) {
@@ -222,6 +235,24 @@ public class PlayerMoveController : MonoBehaviour
         } else {
             moveAudioSource.clip = null;
         }
+    }
+
+    IEnumerator spinEvent() {
+        isCoolDown = true;
+        isSpin = true;
+        animator.SetBool(isSpinId, isSpin);
+        yield return null;
+        isSpin = false;
+        animator.SetBool(isSpinId, isSpin);
+        while(true) {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Spin") || animator.IsInTransition(0)) {
+                yield return null;
+            } else {
+                break;
+            }
+        }
+        yield return new WaitForSeconds(GameManager.Instance.spinCoolDown);
+        isCoolDown = false;
     }
 
     IEnumerator JumpEvent() {

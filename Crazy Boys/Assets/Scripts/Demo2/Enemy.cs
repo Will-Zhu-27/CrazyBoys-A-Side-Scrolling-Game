@@ -54,6 +54,9 @@ public class Enemy : MonoBehaviour
     }
 
     public bool TakeDamage(int damage) {
+        if (currentHp <= 0) {
+            return false;
+        }
         currentHp -= damage;
         print("current hp: " + currentHp);
         if (currentHp <= 0) {

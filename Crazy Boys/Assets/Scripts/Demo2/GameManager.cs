@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float itemDropRate = 0.5f;
     public GameObject itemPrefab;
+    public float spinCoolDown = 1.0f;
 
     public enum itemType {Health, Ammo};
     // Start is called before the first frame update
