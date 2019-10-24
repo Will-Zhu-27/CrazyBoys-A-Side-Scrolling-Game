@@ -96,6 +96,7 @@ public class Enemy : MonoBehaviour
     private void ShootingEvent() {
         currentAttackTimes++;
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        bullet.layer = this.gameObject.layer;
         bullet.transform.Rotate(bulletRotationOffset);
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
         bulletRigidbody.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);

@@ -25,7 +25,7 @@ public class WeaponManage : MonoBehaviour
         audioSource = this.GetComponent<AudioSource>();
     }
 
-    public bool Fire(Vector3 direction, Vector3 startPosition, Quaternion startRotation) {
+    public bool Fire(Vector3 direction, Vector3 startPosition, Quaternion startRotation, int layer) {
         if (currentClipCapacity <= 0) {
             // need reloading !
             audioSource.clip = gunEmpty;
@@ -34,6 +34,7 @@ public class WeaponManage : MonoBehaviour
         } else {
             currentClipCapacity--;
             GameObject bullet = Instantiate(bulletPrefab, startPosition, startRotation);
+            bullet.layer = layer;
             bullet.transform.Rotate(bulletRotationOffset);
             Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
             bulletRigidbody.AddForce(direction * bulletSpeed, ForceMode.Impulse);
