@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public bool isPlayerDie = false;
 
     public ParticleSystem bloodEffect;
+    public ParticleSystem obstacleEffect;
 
     public enum itemType {Health, Ammo};
     // Start is called before the first frame update
