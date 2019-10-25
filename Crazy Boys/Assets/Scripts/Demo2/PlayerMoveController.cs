@@ -84,8 +84,11 @@ public class PlayerMoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleUserInput();
-        AutoTurnAround();
+        if (!GameManager.Instance.isPlayerDie) {
+            HandleUserInput();
+            AutoTurnAround();
+        }
+        
         CharacterMove();
         // // Physics.Raycast (this.transform.position, Vector3.up, 15.0f)
         // RaycastHit hit;
@@ -101,90 +104,93 @@ public class PlayerMoveController : MonoBehaviour
     
     private void CharacterMove() {
         AnimatorStateInfo animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        // if (animatorStateInfo.IsName("Kick"))
-        // {
-        //     // when player is kicking, stop move
-        //     animator.SetBool(isCrouchId, false);
-        //     move.x = 0.0f;
-        // }
-        // else
-        // {
-        float xInput = Input.GetAxis("Horizontal");
-        if (animatorStateInfo.IsName("Kick") && characterController.isGrounded) {
-            move.x = 0.0f;
-        } else {
-            move.x = xInput;
-        }
-        
-        if (isFaceForward)
+        if (!GameManager.Instance.isPlayerDie)
         {
-            if (xInput > 0.05)
-            {
-                if (isCrouch)
-                {
-                    move.x *= crouchingForwardSpeed;
-                }
-                else
-                {
-                    move.x *= forwardSpeed;
-                }
-            }
-            else if (xInput < -0.05)
-            {
-                if (isCrouch)
-                {
-                    move.x *= crouchingBackwardSpeed;
-                }
-                else
-                {
-                    move.x *= backwardSpeed;
-                }
-            }
-            else
+            float xInput = Input.GetAxis("Horizontal");
+            if (animatorStateInfo.IsName("Kick") && characterController.isGrounded)
             {
                 move.x = 0.0f;
             }
-        }
-        else
-        {
-            if (xInput > 0.05)
-            {
-                if (isCrouch)
-                {
-                    move.x *= crouchingBackwardSpeed;
-                }
-                else
-                {
-                    move.x *= backwardSpeed;
-                }
-            }
-            else if (xInput < -0.05)
-            {
-                if (isCrouch)
-                {
-                    move.x *= crouchingForwardSpeed;
-                }
-                else
-                {
-                    move.x *= forwardSpeed;
-                }
-            }
             else
             {
-                move.x = 0.0f;
+                move.x = xInput;
             }
-        }
-        // }
-        if (characterController.isGrounded) {
-            // We are grounded, so recalculate
-            // move direction directly from axes
 
-            
-            if (!animatorStateInfo.IsName("Quick Roll") && Input.GetKeyDown(jumpKeyCode))
+            if (isFaceForward)
             {
-                move.y = jumpSpeed;
+                if (xInput > 0.05)
+                {
+                    if (isCrouch)
+                    {
+                        move.x *= crouchingForwardSpeed;
+                    }
+                    else
+                    {
+                        move.x *= forwardSpeed;
+                    }
+                }
+                else if (xInput < -0.05)
+                {
+                    if (isCrouch)
+                    {
+                        move.x *= crouchingBackwardSpeed;
+                    }
+                    else
+                    {
+                        move.x *= backwardSpeed;
+                    }
+                }
+                else
+                {
+                    move.x = 0.0f;
+                }
             }
+            else
+            {
+                if (xInput > 0.05)
+                {
+                    if (isCrouch)
+                    {
+                        move.x *= crouchingBackwardSpeed;
+                    }
+                    else
+                    {
+                        move.x *= backwardSpeed;
+                    }
+                }
+                else if (xInput < -0.05)
+                {
+                    if (isCrouch)
+                    {
+                        move.x *= crouchingForwardSpeed;
+                    }
+                    else
+                    {
+                        move.x *= forwardSpeed;
+                    }
+                }
+                else
+                {
+                    move.x = 0.0f;
+                }
+            }
+            if (characterController.isGrounded)
+            {
+                // We are grounded, so recalculate
+                // move direction directly from axes
+
+
+                if (!animatorStateInfo.IsName("Quick Roll") && Input.GetKeyDown(jumpKeyCode))
+                {
+                    move.y = jumpSpeed;
+                }
+            }
+        } else {
+            move = Vector3.zero;
         }
+
+        // }
+        
 
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied

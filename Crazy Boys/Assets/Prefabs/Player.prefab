@@ -4004,7 +4004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fc88f1860684b4db1cfdb42fa8e5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFaceForward: 1
+  isFaceForward: 0
   forwardSpeed: 5
   backwardSpeed: 3
   crouchingForwardSpeed: 3
@@ -4026,7 +4026,7 @@ MonoBehaviour:
   isAutoTrunAround: 1
   jumpKeyCode: 32
   isJump: 0
-  jumpSpeed: 7
+  jumpSpeed: 6
   gravity: 10
   moveAudioSource: {fileID: 5386202325377070606}
   runClip: {fileID: 8300000, guid: 0c58744c3b6fdd844b8348066c3f703e, type: 3}
@@ -4278,7 +4278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a91b29480622d1429a61ac635e850cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAttackKeyCode: 327
+  meleeAttackKeyCode: 106
   meleeDamage: 100
   meleeScript: {fileID: 2510167988804598271}
   bulletPrefab: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,
