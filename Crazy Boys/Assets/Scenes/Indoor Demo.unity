@@ -12830,6 +12830,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 956946484521007175, guid: 110fbca6a5112204b9ad7868283f124c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 102.20001
+      objectReference: {fileID: 0}
+    - target: {fileID: 956946484521007175, guid: 110fbca6a5112204b9ad7868283f124c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.199951
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 110fbca6a5112204b9ad7868283f124c, type: 3}
 --- !u!1001 &693452285
@@ -25803,6 +25813,10 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpSpeed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 940471773, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
+      propertyPath: meleeAttackKeyCode
+      value: 106
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}

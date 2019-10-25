@@ -101,75 +101,80 @@ public class PlayerMoveController : MonoBehaviour
     
     private void CharacterMove() {
         AnimatorStateInfo animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (animatorStateInfo.IsName("Kick"))
-        {
-            // when player is kicking, stop move
-            animator.SetBool(isCrouchId, false);
-            move = Vector3.zero;
-        }
-        else
-        {
-            float xInput = Input.GetAxis("Horizontal");
+        // if (animatorStateInfo.IsName("Kick"))
+        // {
+        //     // when player is kicking, stop move
+        //     animator.SetBool(isCrouchId, false);
+        //     move.x = 0.0f;
+        // }
+        // else
+        // {
+        float xInput = Input.GetAxis("Horizontal");
+        if (animatorStateInfo.IsName("Kick") && characterController.isGrounded) {
+            move.x = 0.0f;
+        } else {
             move.x = xInput;
-            if (isFaceForward)
+        }
+        
+        if (isFaceForward)
+        {
+            if (xInput > 0.05)
             {
-                if (xInput > 0.05)
+                if (isCrouch)
                 {
-                    if (isCrouch)
-                    {
-                        move.x *= crouchingForwardSpeed;
-                    }
-                    else
-                    {
-                        move.x *= forwardSpeed;
-                    }
-                }
-                else if (xInput < -0.05)
-                {
-                    if (isCrouch)
-                    {
-                        move.x *= crouchingBackwardSpeed;
-                    }
-                    else
-                    {
-                        move.x *= backwardSpeed;
-                    }
+                    move.x *= crouchingForwardSpeed;
                 }
                 else
                 {
-                    move.x = 0.0f;
+                    move.x *= forwardSpeed;
+                }
+            }
+            else if (xInput < -0.05)
+            {
+                if (isCrouch)
+                {
+                    move.x *= crouchingBackwardSpeed;
+                }
+                else
+                {
+                    move.x *= backwardSpeed;
                 }
             }
             else
             {
-                if (xInput > 0.05)
+                move.x = 0.0f;
+            }
+        }
+        else
+        {
+            if (xInput > 0.05)
+            {
+                if (isCrouch)
                 {
-                    if (isCrouch)
-                    {
-                        move.x *= crouchingBackwardSpeed;
-                    }
-                    else
-                    {
-                        move.x *= backwardSpeed;
-                    }
-                }
-                else if (xInput < -0.05)
-                {
-                    if (isCrouch)
-                    {
-                        move.x *= crouchingForwardSpeed;
-                    }
-                    else
-                    {
-                        move.x *= forwardSpeed;
-                    }
+                    move.x *= crouchingBackwardSpeed;
                 }
                 else
                 {
-                    move.x = 0.0f;
+                    move.x *= backwardSpeed;
                 }
             }
+            else if (xInput < -0.05)
+            {
+                if (isCrouch)
+                {
+                    move.x *= crouchingForwardSpeed;
+                }
+                else
+                {
+                    move.x *= forwardSpeed;
+                }
+            }
+            else
+            {
+                move.x = 0.0f;
+            }
         }
+        // }
         if (characterController.isGrounded) {
             // We are grounded, so recalculate
             // move direction directly from axes
