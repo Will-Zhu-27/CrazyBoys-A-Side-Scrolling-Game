@@ -87,6 +87,16 @@ public class PlayerMoveController : MonoBehaviour
         HandleUserInput();
         AutoTurnAround();
         CharacterMove();
+        // // Physics.Raycast (this.transform.position, Vector3.up, 15.0f)
+        // RaycastHit hit;
+        // Debug.DrawLine(transform.position, transform.position + Vector3.up * 4, Color.black);
+        
+        // if(Physics.Raycast(transform.position, Vector3.up, out hit, 4.0f, this.gameObject.layer)){
+        //     // if (hit.transform.gameObject.layer == 8) {
+        //         print("collide!!!");
+        //         print(hit.transform.gameObject.layer);
+        //     // }
+        // }
     }
     
     private void CharacterMove() {
