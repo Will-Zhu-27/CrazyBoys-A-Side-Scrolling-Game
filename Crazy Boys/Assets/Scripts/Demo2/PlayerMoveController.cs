@@ -212,12 +212,18 @@ public class PlayerMoveController : MonoBehaviour
         animator.SetFloat(forwardMoveId, forwardMoveInput);
 
         // judge crouch
-        if (Input.GetKeyDown(crouchKeyCode)) {
-            isCrouch = true;
-
-        } else if (Input.GetKeyUp(crouchKeyCode)) {
-            isCrouch = false;
+        bool canStand = true;
+        if (isCrouch) {
+            canStand = this.CanStand();
         }
+        if (Input.GetKey(crouchKeyCode)) {
+            isCrouch = true;
+        } else if(canStand) {
+            isCrouch = false;
+        } else {
+            isCrouch = true;
+        }
+        
         CroushOnCollider(isCrouch);
         animator.SetBool(isCrouchId, isCrouch);
 
@@ -357,4 +363,21 @@ public class PlayerMoveController : MonoBehaviour
         }
     }
 
+    private float standHeight = 1.88f;
+    public LayerMask detectLayer;
+    private bool CanStand() {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), standHeight, detectLayer))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * standHeight, Color.yellow);
+            // Debug.Log("Did Hit");
+            // Debug.Log(hit.transform.position);
+            return false;
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * standHeight, Color.white);
+            // Debug.Log("Did not Hit");
+            return true;
+        }
+    }
 }
