@@ -12,12 +12,12 @@ public class BulletCollisionResponse : MonoBehaviour
                Destroy(this.gameObject); 
             }
             
-        }
-
-        if (col.tag == "Player") {
+        } else if (col.tag == "Player") {
             if (col.GetComponent<PlayerStatus>().TakeDamage(damage)) {
                 Destroy(this.gameObject); 
             }
+        } else {
+            Destroy(this.gameObject);
         }
     }
 }

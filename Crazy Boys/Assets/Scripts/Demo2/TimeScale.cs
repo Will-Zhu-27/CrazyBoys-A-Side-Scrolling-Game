@@ -18,7 +18,7 @@ public class TimeScale : MonoBehaviour
         }
 
         if (Input.GetKey(slowActionKeyCode)) {
-            GameManager.Instance.uIManage.powerImageSlider.fillAmount -= Time.deltaTime * 1f / GameManager.Instance.timePowerTime / Time.timeScale;
+            // GameManager.Instance.uIManage.powerImageSlider.fillAmount -= Time.deltaTime * 1f / GameManager.Instance.timePowerTime / Time.timeScale;
         } else {
             GameManager.Instance.uIManage.powerImageSlider.fillAmount += Time.deltaTime * 1f /  GameManager.Instance.recoverTimePowerTime;
         }
