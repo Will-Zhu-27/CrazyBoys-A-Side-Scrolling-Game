@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public float recoverTimePowerTime = 5f;
     public bool isPlayerDie = false;
 
+    public ParticleSystem bloodEffect;
+
     public enum itemType {Health, Ammo};
     // Start is called before the first frame update
     void Awake()
