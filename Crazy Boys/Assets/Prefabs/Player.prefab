@@ -4278,7 +4278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a91b29480622d1429a61ac635e850cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAttackKeyCode: 106
+  meleeAttackKeyCode: 101
   meleeDamage: 100
   meleeScript: {fileID: 2510167988804598271}
   bulletPrefab: {fileID: 822464885581593736, guid: 8f0e8bc8900e543a7a01f811b850edd5,

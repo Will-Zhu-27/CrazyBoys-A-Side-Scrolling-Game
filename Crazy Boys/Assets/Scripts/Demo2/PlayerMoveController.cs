@@ -100,6 +100,7 @@ public class PlayerMoveController : MonoBehaviour
         //         print(hit.transform.gameObject.layer);
         //     // }
         // }
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0.0f);
     }
 
     private void CharacterMove()
@@ -277,7 +278,13 @@ public class PlayerMoveController : MonoBehaviour
         isCoolDown = true;
         isSpin = true;
         animator.SetBool(isSpinId, isSpin);
-        yield return null;
+        while(true) {
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Spin")){
+                yield return null;
+            } else {
+                break;
+            }
+        }
         isSpin = false;
         animator.SetBool(isSpinId, isSpin);
         while(true) {

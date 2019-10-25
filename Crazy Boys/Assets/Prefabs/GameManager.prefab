@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemRotateSpeed: 60
-  itemDisappearTime: 100
+  itemDisappearTime: 10
   itemDropRate: 0.5
   itemPrefab: {fileID: 535849144648786322, guid: 5574b2bbf24d76a4fb8e0c295a6d9a61,
     type: 3}
@@ -53,3 +53,4 @@ MonoBehaviour:
   timeScaleChange: 0.5
   timePowerTime: 3
   recoverTimePowerTime: 5
+  isPlayerDie: 0
