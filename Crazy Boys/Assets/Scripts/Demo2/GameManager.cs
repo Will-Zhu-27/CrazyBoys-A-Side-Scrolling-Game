@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,15 +12,20 @@ public class GameManager : MonoBehaviour
     public float itemDropRate = 0.5f;
     public GameObject itemPrefab;
     public float spinCoolDown = 1.0f;
+    public GameObject crossHair;
     public UIManage uIManage;
     [Range(0, 1.0f)]
     public float timeScaleChange = 0.5f;
     public float timePowerTime = 3f;
     public float recoverTimePowerTime = 5f;
-    public bool isPlayerDie = false;
+    public bool isPlayerActive = true;
 
     public ParticleSystem bloodEffect;
     public ParticleSystem obstacleEffect;
+    public GameObject gameOverUI;
+    public GameObject winUI;
+    public GameObject player;
+    public GameObject win;
 
     public enum itemType {Health, Ammo};
     // Start is called before the first frame update
@@ -27,4 +33,33 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    public void GameOver() {
+        isPlayerActive = false;
+        gameOverUI.SetActive(true);
+        Cursor.visible = true;
+        crossHair.SetActive(false);
+    }
+
+    public void Win() {
+        isPlayerActive = false;
+        winUI.SetActive(true);
+        Cursor.visible = true;
+        crossHair.SetActive(false);
+        player.GetComponent<PlayerStatus>().StopPlayer();
+        player.GetComponent<Animator>().applyRootMotion = true;
+        player.GetComponent<Animator>().Play("Win");
+        win.SetActive(true);
+    }
+
+    public void OnButtonRetry() {
+        print("retry button");
+        SceneManager.LoadScene("Indoor Demo");
+    }
+
+    public void OnButtonExit() {
+        SceneManager.LoadScene("Main Menu");
+    }
+
+
 }

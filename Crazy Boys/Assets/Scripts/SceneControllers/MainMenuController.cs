@@ -9,6 +9,7 @@ public class MainMenuController : MonoBehaviour
     public void StartGameLevelEasy()
     {
         SceneManager.LoadScene("Indoor Demo");
+        print("press easy");
     }
 
     public void StartGameLevelHard()

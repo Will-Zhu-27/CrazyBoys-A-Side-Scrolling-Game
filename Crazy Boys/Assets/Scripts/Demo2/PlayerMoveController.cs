@@ -84,7 +84,7 @@ public class PlayerMoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.isPlayerDie) {
+        if (GameManager.Instance.isPlayerActive) {
             HandleUserInput();
             AutoTurnAround();
         }
@@ -105,7 +105,7 @@ public class PlayerMoveController : MonoBehaviour
 
     private void CharacterMove()
     {
-        if (!GameManager.Instance.isPlayerDie)
+        if (GameManager.Instance.isPlayerActive)
         {
             
             AnimatorStateInfo animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);

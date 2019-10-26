@@ -30,17 +30,21 @@ public class PlayerStatus : MonoBehaviour
     }
 
     private void Die() {
-        // this.GetComponent<CharacterController>().enabled = false;
-        GameManager.Instance.isPlayerDie = true;
-        // this.GetComponent<PlayerMoveController>().enabled = false;
-        this.GetComponent<PlayerAttackController>().enabled = false;
-        this.GetComponent<PlayerIKController>().enabled = false;
-        // animator.applyRootMotion = true;
+        StopPlayer();
         if (Random.Range(0, 2) == 0) {
             animator.Play("Falling Back Death");
         } else {
             animator.Play("Mutant Dying");
         }
+    }
+
+    public void StopPlayer() {
+        // this.GetComponent<CharacterController>().enabled = false;
+        GameManager.Instance.GameOver();
+        // this.GetComponent<PlayerMoveController>().enabled = false;
+        this.GetComponent<PlayerAttackController>().enabled = false;
+        this.GetComponent<PlayerIKController>().enabled = false;
+        // animator.applyRootMotion = true;
     }
 
     private void SetInvincible(int status) {
