@@ -46,11 +46,22 @@ MonoBehaviour:
   itemRotateSpeed: 60
   itemDisappearTime: 10
   itemDropRate: 0.5
+  itemAddHP: 150
+  itemAddAmmo: 50
   itemPrefab: {fileID: 535849144648786322, guid: 5574b2bbf24d76a4fb8e0c295a6d9a61,
     type: 3}
   spinCoolDown: 1
+  crossHair: {fileID: 0}
   uIManage: {fileID: 0}
   timeScaleChange: 0.5
   timePowerTime: 3
   recoverTimePowerTime: 5
-  isPlayerDie: 0
+  isPlayerActive: 1
+  bloodEffect: {fileID: 3825769653289042630, guid: 5ca95fb889cff0f43a5e80c961252fb2,
+    type: 3}
+  obstacleEffect: {fileID: 6633994288871132869, guid: dd37ffbadc349504abedee6b994c5c03,
+    type: 3}
+  gameOverUI: {fileID: 0}
+  winUI: {fileID: 0}
+  player: {fileID: 0}
+  win: {fileID: 0}
