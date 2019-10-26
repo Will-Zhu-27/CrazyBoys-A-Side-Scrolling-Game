@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 370912360}
   - component: {fileID: 370912362}
   - component: {fileID: 370912361}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GunShot_Smoke_FX (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4847,7 +4847,7 @@ GameObject:
   - component: {fileID: 1518277424}
   - component: {fileID: 1518277426}
   - component: {fileID: 1518277425}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GunShot_Sparks_FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9780,7 +9780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &662760208338220357
 Transform:
   m_ObjectHideFlags: 0
@@ -13537,6 +13537,9 @@ MonoBehaviour:
   moveAudioSource: {fileID: 5386202325377070606}
   runClip: {fileID: 8300000, guid: 0c58744c3b6fdd844b8348066c3f703e, type: 3}
   walkClip: {fileID: 8300000, guid: 6597a368cd74a924eaedb0171d5b28d3, type: 3}
+  detectLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &1074792657440928652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13868,11 +13871,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074792657440928640}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d17b1df1e2fee4b7fb23683ac005a72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  rayLength: 1.88
 --- !u!1 &1074792657440929878
 GameObject:
   m_ObjectHideFlags: 0
@@ -14012,7 +14019,7 @@ GameObject:
   - component: {fileID: 1387375461677236397}
   - component: {fileID: 1387375461662038385}
   - component: {fileID: 1387375461661298163}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GunShot_Smoke_FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18698,7 +18705,7 @@ GameObject:
   - component: {fileID: 1387375461677169801}
   - component: {fileID: 1387375461661935669}
   - component: {fileID: 1387375461661318395}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GunShot_Sparks_FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
