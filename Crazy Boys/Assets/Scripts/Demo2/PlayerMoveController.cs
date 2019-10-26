@@ -184,9 +184,13 @@ public class PlayerMoveController : MonoBehaviour
                 }
             }
 
-            if (!animatorStateInfo.IsName("Quick Roll") && Input.GetKeyDown(jumpKeyCode) && characterController.isGrounded)
+            if (!animatorStateInfo.IsName("Quick Roll") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling") && Input.GetKeyDown(jumpKeyCode) && characterController.isGrounded)
             {
                 move.y = jumpSpeed;
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Falling")) {
+                    StartCoroutine(JumpEvent());
+                }
+                animator.SetBool(isJumpId, isJump);
             }
         }
         else
@@ -246,10 +250,10 @@ public class PlayerMoveController : MonoBehaviour
         animator.SetBool(isRollId, isRoll);
 
         // jump
-        if (!this.isJump && !this.isCrouch && Input.GetKey(jumpKeyCode) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling")) {
-            StartCoroutine(JumpEvent());
-        }
-        animator.SetBool(isJumpId, isJump);
+        // if (!this.isJump && Input.GetKeyDown(jumpKeyCode) && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling")) {
+        //     StartCoroutine(JumpEvent());
+        // }
+        // animator.SetBool(isJumpId, isJump);
 
         // spin
         if (!isCoolDown) {
@@ -306,10 +310,15 @@ public class PlayerMoveController : MonoBehaviour
 
     IEnumerator JumpEvent() {
         this.isJump = true;
+        while(characterController.isGrounded) {
+            yield return null;
+        }
         while(!characterController.isGrounded) {
             yield return null;
         }
         this.isJump = false;
+        animator.SetBool(isJumpId, isJump);
+
     }
 
     private void AutoTurnAround() {

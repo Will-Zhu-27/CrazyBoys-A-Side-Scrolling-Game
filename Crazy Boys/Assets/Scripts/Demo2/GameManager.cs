@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public void GameOver() {
         isPlayerActive = false;
         gameOverUI.SetActive(true);
+        // winUI.SetActive(false);
         Cursor.visible = true;
         crossHair.SetActive(false);
     }
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     public void Win() {
         isPlayerActive = false;
         winUI.SetActive(true);
+        // gameOverUI.SetActive(false);
         Cursor.visible = true;
         crossHair.SetActive(false);
         player.GetComponent<PlayerStatus>().StopPlayer();
