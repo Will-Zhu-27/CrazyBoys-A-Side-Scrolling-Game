@@ -8,8 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PolygonHeist_Character_Material_01
-  m_Shader: {fileID: 4800000, guid: ba69a371897ff418f844200db72fd00e, type: 3}
-  m_ShaderKeywords: _ _EMISSION _EMISSIVE_SIMPLE _OUTLINE_NML
+  m_Shader: {fileID: 4800000, guid: c87f2668057b64ad59d693d08192e5cd, type: 3}
+  m_ShaderKeywords: _ _EMISSION _EMISSIVE_SIMPLE _FRESNEL_ON _GLOSSYREFLECTIONS_ON
+    _OUTLINE_NML _SPECULARHIGHLIGHTS_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -119,6 +120,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _1st2nd_Shades_Feather: 0.0001
     - _1st_ShadeColor_Feather: 0.0001
@@ -143,6 +148,10 @@ Material:
     - _EMISSIVE: 0
     - _EmissionScaleUI: 0
     - _Farthest_Distance: 100
+    - _Fresnel: 1
+    - _FresnelDiffCont: 0.5
+    - _FresnelPower: 0.5
+    - _FresnelStrength: 0.2
     - _GI_Intensity: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -189,10 +198,12 @@ Material:
     - _Offset_Z: 0
     - _Outline_Width: 0
     - _Parallax: 0.02
+    - _RimAmount: 0.716
     - _RimLight: 0
     - _RimLight_FeatherOff: 0
     - _RimLight_InsideMask: 0.0001
     - _RimLight_Power: 0.1
+    - _RimThreshold: 0.1
     - _Rotate_EmissiveUV: 0
     - _Rotate_MatCapUV: 0
     - _Rotate_NormalMapForMatCapUV: 0
@@ -204,6 +215,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StencilNo: 1
+    - _Transmission: 0
     - _TweakHighColorOnShadow: 0
     - _TweakMatCapOnShadow: 0
     - _Tweak_HighColorMaskLevel: 0
@@ -223,6 +235,7 @@ Material:
     m_Colors:
     - _1st_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _AmbientColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -230,8 +243,12 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _FresnelTint: {r: 1, g: 1, b: 1, a: 1}
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _Outline_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecularColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
     - _ViewShift: {r: 0, g: 0, b: 0, a: 1}

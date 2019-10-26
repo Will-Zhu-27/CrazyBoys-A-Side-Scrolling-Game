@@ -137,15 +137,19 @@ public class Enemy : MonoBehaviour
             Vector3 tempVector = target.position - this.chest.transform.position;
             tempVector.z = 0;
             Vector3 toDirection;
-            if (tempVector.x > 0.1) {
+            if (tempVector.x > 0.0f) {
                 toDirection = Vector3.right;
-            } else if(tempVector.x < -0.1) {
-                toDirection = Vector3.left;
             } else {
-                return;
+                toDirection = Vector3.left;
             }
             Quaternion temp = Quaternion.FromToRotation(tempVector, toDirection);
-            this.chest.transform.Rotate(-(temp.eulerAngles));
+            Vector3 rotation;
+            if (tempVector.x > 0.0f) {
+                rotation = temp.eulerAngles;
+            } else {
+                rotation = -temp.eulerAngles;
+            }
+            this.chest.transform.Rotate(rotation);
         }
         
     }

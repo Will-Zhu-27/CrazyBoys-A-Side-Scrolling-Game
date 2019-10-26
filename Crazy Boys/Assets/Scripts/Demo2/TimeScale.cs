@@ -27,13 +27,4 @@ public class TimeScale : MonoBehaviour
         }
         
     }
-
-    // void FixedUpdate() {
-    //     if (Input.GetKey(slowActionKeyCode)) {
-    //         GameManager.Instance.uIManage.powerImageSlider.fillAmount -= Time.fixedDeltaTime * 1f;
-    //     } else {
-    //         GameManager.Instance.uIManage.powerImageSlider.fillAmount += Time.deltaTime * 0.5f;
-            
-    //     }
-    // }
 }

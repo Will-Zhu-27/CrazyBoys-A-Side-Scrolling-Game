@@ -15,13 +15,13 @@ public class PlayerAttackController : MonoBehaviour
     public Transform leftBulletSpawn;
     [SerializeField] private KeyCode shootingKeyCode = KeyCode.Mouse0 ;
     [SerializeField] private KeyCode reloadingKeyCode = KeyCode.R ;
-    [SerializeField] private float bulletSpeed = 15f;
-    [SerializeField] private Vector3 bulletRotationOffset = new Vector3(90, 0, 0);
     private bool isRightShooting = true;
     private Animator animator;
     private int isKickId;
     private bool isKick = false;
     private WeaponManage weaponManage;
+    public ParticleSystem leftGunEffect;
+    public ParticleSystem rightGunEffect;
 
 
     // Start is called before the first frame update
@@ -38,12 +38,17 @@ public class PlayerAttackController : MonoBehaviour
     {
         if (Input.GetKeyDown(shootingKeyCode)) {
             Transform start = null;
+            ParticleSystem effect = null;
             if (isRightShooting) {
                 start = rightBulletSpawn;
+                effect = rightGunEffect;
             } else {
                 start = leftBulletSpawn;
+                effect = leftGunEffect;
             }
-            weaponManage.Fire(start.forward, start.position, start.rotation, this.gameObject.layer);
+            if(weaponManage.Fire(start.forward, start.position, start.rotation, this.gameObject.layer)) {
+                effect.Play();
+            }
             isRightShooting = !isRightShooting;
         }
         if (Input.GetKeyDown(reloadingKeyCode)) {

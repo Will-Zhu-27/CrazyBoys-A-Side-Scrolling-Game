@@ -84,17 +84,32 @@ public class PlayerMoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleUserInput();
-        AutoTurnAround();
+        if (!GameManager.Instance.isPlayerDie) {
+            HandleUserInput();
+            AutoTurnAround();
+        }
+        
         CharacterMove();
+        // // Physics.Raycast (this.transform.position, Vector3.up, 15.0f)
+        // RaycastHit hit;
+        // Debug.DrawLine(transform.position, transform.position + Vector3.up * 4, Color.black);
+        
+        // if(Physics.Raycast(transform.position, Vector3.up, out hit, 4.0f, this.gameObject.layer)){
+        //     // if (hit.transform.gameObject.layer == 8) {
+        //         print("collide!!!");
+        //         print(hit.transform.gameObject.layer);
+        //     // }
+        // }
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0.0f);
     }
-    
-    private void CharacterMove() {
-        if (characterController.isGrounded) {
-            // We are grounded, so recalculate
-            // move direction directly from axes
+
+    private void CharacterMove()
+    {
+        if (!GameManager.Instance.isPlayerDie)
+        {
+            
             AnimatorStateInfo animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (animatorStateInfo.IsName("Kick"))
+            if (animatorStateInfo.IsName("Kick") && characterController.isGrounded)
             {
                 // when player is kicking, stop move
                 animator.SetBool(isCrouchId, false);
@@ -103,60 +118,82 @@ public class PlayerMoveController : MonoBehaviour
             else
             {
                 float xInput = Input.GetAxis("Horizontal");
-                move = new Vector3(xInput, 0.0f, 0.0f);
+                if (characterController.isGrounded) {
+                    move = new Vector3(xInput, 0.0f, 0.0f);
+                } else {
+                    move.x = xInput;
+                }
+                
                 if (isFaceForward)
                 {
                     if (xInput > 0.05)
                     {
-                        if (isCrouch) {
-                            move *= crouchingForwardSpeed;
-                        } else {
-                            move *= forwardSpeed;
+                        if (isCrouch)
+                        {
+                            move.x *= crouchingForwardSpeed;
+                        }
+                        else
+                        {
+                            move.x *= forwardSpeed;
                         }
                     }
                     else if (xInput < -0.05)
                     {
-                        if (isCrouch) {
-                            move *= crouchingBackwardSpeed;
-                        } else {
-                            move *= backwardSpeed;
+                        if (isCrouch)
+                        {
+                            move.x *= crouchingBackwardSpeed;
+                        }
+                        else
+                        {
+                            move.x *= backwardSpeed;
                         }
                     }
                     else
                     {
-                        move = Vector3.zero;
+                        move.x = 0.0f;
                     }
                 }
                 else
                 {
                     if (xInput > 0.05)
                     {
-                        if (isCrouch) {
-                            move *= crouchingBackwardSpeed;
-                        } else {
-                            move *= backwardSpeed;
+                        if (isCrouch)
+                        {
+                            move.x *= crouchingBackwardSpeed;
+                        }
+                        else
+                        {
+                            move.x *= backwardSpeed;
                         }
                     }
                     else if (xInput < -0.05)
                     {
-                        if (isCrouch) {
-                            move *= crouchingForwardSpeed;
-                        } else {
-                            move *= forwardSpeed;
+                        if (isCrouch)
+                        {
+                            move.x *= crouchingForwardSpeed;
+                        }
+                        else
+                        {
+                            move.x *= forwardSpeed;
                         }
                     }
                     else
                     {
-                        move = Vector3.zero;
+                        move.x = 0.0f;
                     }
                 }
             }
-            
-            if (!animatorStateInfo.IsName("Quick Roll") && Input.GetKeyDown(jumpKeyCode))
+
+            if (!animatorStateInfo.IsName("Quick Roll") && Input.GetKeyDown(jumpKeyCode) && characterController.isGrounded)
             {
                 move.y = jumpSpeed;
             }
         }
+        else
+        {
+            move.x = 0.0f;
+        }
+
 
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
@@ -175,12 +212,18 @@ public class PlayerMoveController : MonoBehaviour
         animator.SetFloat(forwardMoveId, forwardMoveInput);
 
         // judge crouch
-        if (Input.GetKeyDown(crouchKeyCode)) {
-            isCrouch = true;
-
-        } else if (Input.GetKeyUp(crouchKeyCode)) {
-            isCrouch = false;
+        bool canStand = true;
+        if (isCrouch) {
+            canStand = this.CanStand();
         }
+        if (Input.GetKey(crouchKeyCode)) {
+            isCrouch = true;
+        } else if(canStand) {
+            isCrouch = false;
+        } else {
+            isCrouch = true;
+        }
+        
         CroushOnCollider(isCrouch);
         animator.SetBool(isCrouchId, isCrouch);
 
@@ -241,7 +284,13 @@ public class PlayerMoveController : MonoBehaviour
         isCoolDown = true;
         isSpin = true;
         animator.SetBool(isSpinId, isSpin);
-        yield return null;
+        while(true) {
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Spin")){
+                yield return null;
+            } else {
+                break;
+            }
+        }
         isSpin = false;
         animator.SetBool(isSpinId, isSpin);
         while(true) {
@@ -314,4 +363,21 @@ public class PlayerMoveController : MonoBehaviour
         }
     }
 
+    private float standHeight = 1.88f;
+    public LayerMask detectLayer;
+    private bool CanStand() {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), standHeight, detectLayer))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * standHeight, Color.yellow);
+            // Debug.Log("Did Hit");
+            // Debug.Log(hit.transform.position);
+            return false;
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * standHeight, Color.white);
+            // Debug.Log("Did not Hit");
+            return true;
+        }
+    }
 }

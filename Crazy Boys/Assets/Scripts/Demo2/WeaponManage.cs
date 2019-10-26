@@ -18,6 +18,7 @@ public class WeaponManage : MonoBehaviour
     public AudioClip gunEmpty;
     public UIManage uIManage;
 
+
     private void Awake() {
         currentClipCapacity = maxClipCapacity;
     }
