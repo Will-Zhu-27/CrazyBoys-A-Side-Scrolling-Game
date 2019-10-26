@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    public GameObject mainMenu;
+    public GameObject instruction;
     
     public void StartGameLevelEasy()
     {
@@ -12,14 +14,15 @@ public class MainMenuController : MonoBehaviour
         print("press easy");
     }
 
-    public void StartGameLevelHard()
-    {
-        SceneManager.LoadScene("Indoor");
-    }
-
     public void GoToInstructions()
     {
-        SceneManager.LoadScene("Instructions");
+        mainMenu.SetActive(false);
+        instruction.SetActive(true);
+    }
+
+    public void OnButtonReturn() {
+        mainMenu.SetActive(true);
+        instruction.SetActive(false);
     }
 
     public void Quit() {
