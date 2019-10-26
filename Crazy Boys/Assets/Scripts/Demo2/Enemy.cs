@@ -118,11 +118,11 @@ public class Enemy : MonoBehaviour
     }
 
     void OnAnimatorIK() {
-        if (ikActive && enemyFieldOfView.visibleTargets.Count != 0) {
-            Transform target = enemyFieldOfView.visibleTargets[0];
+        if (ikActive && enemyFieldOfView.visibleTargets) {
+            Transform target = enemyFieldOfView.visibleTargets;
             if (isHeadWatch) {
                 animator.SetLookAtWeight(1);
-                animator.SetLookAtPosition(enemyFieldOfView.visibleTargets[0].position);
+                animator.SetLookAtPosition(enemyFieldOfView.visibleTargets.position);
             }
             // Quaternion chestRotate = animator.GetBoneTransform(HumanBodyBones.Chest).rotation;
             // animator.SetBoneLocalRotation(HumanBodyBones.Chest, Quaternion.Euler(this.chestRotateOffset));
@@ -133,7 +133,7 @@ public class Enemy : MonoBehaviour
 	}
 
     void LateUpdate() {
-        if (enemyFieldOfView.visibleTargets.Count != 0) {
+        if (enemyFieldOfView.visibleTargets) {
             Vector3 tempVector = target.position - this.chest.transform.position;
             tempVector.z = 0;
             Vector3 toDirection;

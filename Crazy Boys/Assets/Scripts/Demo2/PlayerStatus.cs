@@ -31,6 +31,7 @@ public class PlayerStatus : MonoBehaviour
 
     private void Die() {
         StopPlayer();
+        GameManager.Instance.GameOver();
         if (Random.Range(0, 2) == 0) {
             animator.Play("Falling Back Death");
         } else {
@@ -39,12 +40,8 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public void StopPlayer() {
-        // this.GetComponent<CharacterController>().enabled = false;
-        GameManager.Instance.GameOver();
-        // this.GetComponent<PlayerMoveController>().enabled = false;
         this.GetComponent<PlayerAttackController>().enabled = false;
         this.GetComponent<PlayerIKController>().enabled = false;
-        // animator.applyRootMotion = true;
     }
 
     private void SetInvincible(int status) {
@@ -59,6 +56,4 @@ public class PlayerStatus : MonoBehaviour
         currentHP = currentHP + increment > maxHP ? maxHP : currentHP + increment;
         uIManage.UpdateHPSlider((float)currentHP/maxHP);
     }
-
-
 }

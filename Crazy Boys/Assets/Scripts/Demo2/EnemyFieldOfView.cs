@@ -17,7 +17,7 @@ public class EnemyFieldOfView : MonoBehaviour {
 	public LayerMask obstacleMask;
 
 	[HideInInspector]
-	public List<Transform> visibleTargets = new List<Transform>();
+	public Transform visibleTargets = null;
 	private Enemy enemy;
 
 	void Start() {
@@ -33,7 +33,7 @@ public class EnemyFieldOfView : MonoBehaviour {
 	}
 
 	void FindVisibleTargets() {
-		visibleTargets.Clear ();
+		visibleTargets = null;
 		Collider[] targetsInViewRadius = Physics.OverlapSphere (viewPoint.position, viewRadius, targetMask);
 		bool isGetTarget = false;
 
@@ -44,7 +44,7 @@ public class EnemyFieldOfView : MonoBehaviour {
 				float dstToTarget = Vector3.Distance (viewPoint.position, target.position);
 
 				if (!Physics.Raycast (viewPoint.position, dirToTarget, dstToTarget, obstacleMask)) {
-					visibleTargets.Add (target);
+					visibleTargets = target;
 					isGetTarget = true;
 				}
 			}
