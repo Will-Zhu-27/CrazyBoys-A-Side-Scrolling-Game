@@ -3500,7 +3500,6 @@ GameObject:
   - component: {fileID: 3540105148473368172}
   - component: {fileID: 4596650034846446370}
   - component: {fileID: 4596650034846446373}
-  - component: {fileID: 4596650034846446371}
   - component: {fileID: 4596650034846446368}
   m_Layer: 9
   m_Name: Enemy
@@ -3693,29 +3692,6 @@ MonoBehaviour:
   target: {fileID: 0}
   chestRotateOffset: {x: 0, y: 0, z: 0}
   chest: {fileID: 4596650034846014912}
---- !u!114 &4596650034846446371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596650034846446372}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e301e4a0075dc84ab8c44c47dba66da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ikActive: 1
-  lookAim: {fileID: 0}
-  isHeadWatch: 0
-  isLeftHandToward: 1
-  leftHandRotationWeight: 0
-  leftHandAim: {fileID: 4768967254941049239}
-  leftHandAimOffset: {x: 0, y: 0, z: 0}
-  isRightHandToward: 1
-  rightHandRotationWeight: 0
-  rightHandAim: {fileID: 4768967256510865771}
-  rightHandAimOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &4596650034846446368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4776,12 +4752,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c4f4c967cbf830459d53c4a848651ca, type: 3}
---- !u!4 &4768967255950096311 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 412886, guid: 2c4f4c967cbf830459d53c4a848651ca,
-    type: 3}
-  m_PrefabInstance: {fileID: 4768967255949687649}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4768967255950084455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 422406, guid: 2c4f4c967cbf830459d53c4a848651ca,
@@ -4791,6 +4761,12 @@ Transform:
 --- !u!4 &4768967255950095451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 413498, guid: 2c4f4c967cbf830459d53c4a848651ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 4768967255949687649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4768967255950096311 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 412886, guid: 2c4f4c967cbf830459d53c4a848651ca,
     type: 3}
   m_PrefabInstance: {fileID: 4768967255949687649}
   m_PrefabAsset: {fileID: 0}
