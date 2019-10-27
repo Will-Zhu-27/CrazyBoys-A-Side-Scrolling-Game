@@ -61390,6 +61390,10 @@ PrefabInstance:
       propertyPath: uIManage
       value: 
       objectReference: {fileID: 1050567692}
+    - target: {fileID: 940471774, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
+      propertyPath: maxHP
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
 --- !u!4 &1396257385

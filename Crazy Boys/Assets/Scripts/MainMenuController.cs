@@ -8,6 +8,11 @@ public class MainMenuController : MonoBehaviour
     public GameObject mainMenu;
     public GameObject instruction;
     
+    private void Start()
+    {
+        mainMenu.SetActive(true);
+        instruction.SetActive(false);
+    }
     public void StartGameLevelEasy()
     {
         SceneManager.LoadScene("Game");
