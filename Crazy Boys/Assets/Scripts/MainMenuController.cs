@@ -11,7 +11,7 @@ public class MainMenuController : MonoBehaviour
     public void StartGameLevelEasy()
     {
         SceneManager.LoadScene("Game");
-        print("press easy");
+        // print("press easy");
     }
 
     public void GoToInstructions()

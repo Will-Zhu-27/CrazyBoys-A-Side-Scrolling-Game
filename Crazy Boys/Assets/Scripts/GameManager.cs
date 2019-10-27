@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void OnButtonRetry() {
-        print("retry button");
+        // print("retry button");
         SceneManager.LoadScene("Game");
     }
 

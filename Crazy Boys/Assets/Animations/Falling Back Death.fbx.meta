@@ -62,7 +62,8 @@ ModelImporter:
       - time: 1
         functionName: MissionComplete
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 4596650034846446372, guid: b7a3dc871eda27742bd7203e20e2ccb1,
+          type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
