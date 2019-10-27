@@ -41600,6 +41600,16 @@ PrefabInstance:
       propertyPath: win
       value: 
       objectReference: {fileID: 1432781716}
+    - target: {fileID: 2538941329062176572, guid: 34253d183bfc3474890ba97ccc0ef7cc,
+        type: 3}
+      propertyPath: itemDropRate
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538941329062176572, guid: 34253d183bfc3474890ba97ccc0ef7cc,
+        type: 3}
+      propertyPath: itemAddHP
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34253d183bfc3474890ba97ccc0ef7cc, type: 3}
 --- !u!114 &912337288 stripped
@@ -48430,7 +48440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1905685010}
-  smothing: 10
+  smothing: 20
 --- !u!81 &1120575251
 AudioListener:
   m_ObjectHideFlags: 0
@@ -61392,7 +61402,7 @@ PrefabInstance:
       objectReference: {fileID: 1050567692}
     - target: {fileID: 940471774, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
       propertyPath: maxHP
-      value: 500
+      value: 600
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e91924478ad8664b9fb8a3b248fd1d2, type: 3}
